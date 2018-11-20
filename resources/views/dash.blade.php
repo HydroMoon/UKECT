@@ -5,7 +5,7 @@
       @include('extra._stylesheets')
     </head>
     <body>
-      @include('extra._dash_nav')
+      @include('extra._nav')
 
       @yield('jum')
 

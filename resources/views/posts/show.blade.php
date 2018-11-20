@@ -17,11 +17,14 @@
 
     <hr>
 
-    <img class="img-fluid rounded" src="https://www.stanhopestreetprimary.ie/wp-content/uploads/2013/11/900x300.png" alt="">
+    <img class="img-fluid rounded" src="{{ asset('images/' . $post->image) }}" alt="">
 
     <hr>
 
-    <p class="lead">{!! $post->body !!}</p>
+    <div>
+      {!! $post->body !!}
+    </div>
+
 
   </div>
   <div class="col-md-4">
@@ -53,6 +56,9 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
           </form>
+        </div>
+        <div class="row">
+          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">الرجوع للمنشورات</a>
         </div>
       </div>
     </div>

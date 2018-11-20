@@ -15,7 +15,7 @@
 @section('content')
 <div class="row">
   <div class="col-lg-8">
-    <form id="editpost" action="{{ route('posts.update', $post->id) }}" method="POST">
+    <form id="editpost" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data" method="POST">
       {{ method_field('PUT') }}
       {{ csrf_field() }}
       <div class="form-group">
@@ -25,6 +25,10 @@
       <div class="form-group">
         <label>الرابط</label>
         <input type="text" class="form-control" name="slug" value="{{ $post->slug }}">
+      </div>
+      <div class="form-group">
+        <label>صورة الغلاف:</label>
+        <input type="file" name="front_image" class="form-control">
       </div>
       <div class="form-group">
         <label>النص</label>
@@ -50,6 +54,9 @@
                     document.getElementById('editpost').submit();">
             حفظ
           </a>
+        </div>
+        <div class="row">
+          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">الرجوع للمنشورات</a>
         </div>
       </div>
     </div>

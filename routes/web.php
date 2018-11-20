@@ -10,16 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::resource('posts', 'PostController');
-
-Auth::routes();
 
 Route::get('blog', 'BlogController@getIndex')->name('blog');
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
 
 Route::get('dash', 'DashController@index')->name('dash');
 
-// Route::get('/dash', function () {
-//     return view('dashboard.index');
-// });
+Route::get('/', function () {
+    return view('main.index');
+})->name('main');
+
+Route::get('about', function () {
+    return view('main.about');
+})->name('about');

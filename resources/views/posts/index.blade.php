@@ -4,11 +4,11 @@
 @endsection
 @section('content')
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 mt-2">
       <h1>جميع المنشورات</h1>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 mt-2">
       <a href="{{ route('posts.create') }}" class="btn btn-lg btn-block btn-primary">انشاء بوست</a>
     </div>
     <div class="col-md-12">
@@ -17,30 +17,35 @@
   </div> <!-- end of .row -->
 
   <div class="row">
-    <div class="col-md-12">
-      <table class="table">
+    <div class="col-md-12" style="overflow-x:auto;">
+      <table class="table table-striped">
         <thead>
-          <th>#</th>
-          <th>العنوان</th>
-          <th>المحتوى</th>
-          <th>تاريخ الانشاء</th>
-          <th></th>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">العنوان</th>
+            <th scope="col">المحتوى</th>
+            <th scope="col">تاريخ الانشاء</th>
+          </tr>
         </thead>
-
         <tbody>
-
           @foreach ($posts as $post)
-
           <tr>
             <th>{{ $post->id }}</th>
             <td>{{ $post->title }}</td>
-            <td>{{ substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
+            <td>{{ mb_substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
             <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
-            <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-sm">فتح</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">تعديل</a></td>
+            <td>
+              <div class="row">
+                <div class="col-sm m-1">
+                  <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-sm">فتح</a>
+                </div>
+                <div class="col-sm m-1">
+                  <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">تعديل</a>
+                </div>
+              </div>
+            </td>
           </tr>
-
           @endforeach
-
         </tbody>
       </table>
 

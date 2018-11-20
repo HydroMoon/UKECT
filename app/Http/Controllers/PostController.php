@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Session;
+use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -19,7 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-      $posts = Post::orderBy('id', 'asc')->paginate(10);
+      $posts = Post::orderBy('id', 'desc')->paginate(10);
       return view('posts.index')->withPosts($posts);
     }
 
@@ -45,7 +47,8 @@ class PostController extends Controller
         $this->validate($request, array(
           'title' => 'required|max:255',
           'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-          'body' => 'required'
+          'body' => 'required',
+          'front_image' => 'sometimes|image'
         ));
         //save info into database
         $post = new Post;
@@ -53,6 +56,15 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->body = $request->body;
+
+        if ($request->hasFile('front_image')) {
+          $image = $request->file('front_image');
+          $filename = time() . '.' . $image->getClientOriginalExtension();
+          $location = public_path('images/' . $filename);
+          Image::make($image)->resize(750, 300)->save($location);
+
+          $post->image = $filename;
+        }
 
         $post->save();
 
@@ -97,25 +109,41 @@ class PostController extends Controller
       // Validate the data
       $post = Post::find($id);
 
-      if ($request->input('slug') == $post->slug) {
+      if ($request->slug == $post->slug) {
           $this->validate($request, array(
               'title' => 'required|max:255',
-              'body'  => 'required'
+              'body'  => 'required',
+              'front_image' => 'sometimes|image'
           ));
       } else {
       $this->validate($request, array(
               'title' => 'required|max:255',
               'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-              'body'  => 'required'
+              'body'  => 'required',
+              'front_image' => 'sometimes|image'
           ));
       }
 
       // Save the data to the database
       $post = Post::find($id);
 
-      $post->title = $request->input('title');
-      $post->slug = $request->input('slug');
-      $post->body = $request->input('body');
+      $post->title = $request->title;
+      $post->slug = $request->slug;
+      $post->body = $request->body;
+
+      if ($request->hasFile('front_image')) {
+        $image = $request->file('front_image');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $location = public_path('images/' . $filename);
+        Image::make($image)->resize(750, 300)->save($location);
+
+        $oldfilename = $post->image;
+
+        $post->image = $filename;
+
+        Storage::delete($oldfilename);
+
+      }
 
       $post->save();
 
@@ -135,6 +163,8 @@ class PostController extends Controller
     public function destroy($id)
     {
       $post = Post::find($id);
+
+      Storage::delete($post->image);
 
       $post->delete();
 
