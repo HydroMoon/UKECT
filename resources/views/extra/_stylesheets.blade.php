@@ -5,6 +5,7 @@
     font-family: 'Droid Arabic Kufi', serif;
   }
   body {
+    background: #fff9c4 !important;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;

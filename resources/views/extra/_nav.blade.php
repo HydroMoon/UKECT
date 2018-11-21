@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+<nav class="navbar navbar-expand-lg navbar-dark peach-gradient">
 
   <!-- Navbar brand -->
   <a class="navbar-brand" href="{{ route('main') }}">المؤسسة البريطانية</a>
@@ -22,6 +22,9 @@
       </li>
       <li class="nav-item {{ Request::is('about') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('about') }}">عن المؤسسة</a>
+      </li>
+      <li class="nav-item {{ Request::is('contact-us') ? "active" : "" }}">
+        <a class="nav-link" href="{{ route('contact') }}">تواصل معنا</a>
       </li>
     </ul>
 

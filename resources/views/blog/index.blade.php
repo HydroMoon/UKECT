@@ -4,7 +4,7 @@
 @endsection
 @section('jum')
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid peach-gradient">
   <div class="container">
     <h1 class="display-4">مرحبا بك في مدونتنا</h1>
     <p class="lead">هنا سوف تجد جميع الاخبار المتعلقة بالمؤسسة البريطانية</p>

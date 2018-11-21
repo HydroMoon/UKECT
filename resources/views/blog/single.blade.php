@@ -25,7 +25,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-fluid rounded" src="lol900x300.jpg" alt="">
+    <img class="img-fluid rounded" src="{{ asset('images/' . $post->image) }}" alt=""/>
 
     <hr>
     {!! $post->body !!}

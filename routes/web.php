@@ -26,3 +26,12 @@ Route::get('/', function () {
 Route::get('about', function () {
     return view('main.about');
 })->name('about');
+
+Route::get('contact-us', function () {
+    return view('main.contact');
+})->name('contact');
+
+//Courses
+Route::get('short-courses', function () {
+    return view('courses.short');
+})->name('short');
