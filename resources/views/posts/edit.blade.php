@@ -36,6 +36,7 @@
       </div>
     </form>
   </div>
+
   <div class="col-md-4">
     <div class="card my-4">
       <h5 class="card-header">المنشور</h5>

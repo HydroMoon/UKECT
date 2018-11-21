@@ -8,8 +8,11 @@
     <div class="card-body">
       <div class="card-title">الكورسات</div>
       <ul>
-        <li class="nav-item">طويلة المدى</li>
-        <li class="nav-item">قصيرة المدى</li>
+        <div class="form-control">
+          <a class="btn btn-default" href="#">الكورسات</a>
+          <a class="btn btn-default" href="#">إضافة كورس قصير</a>
+          <a class="btn btn-default" href="#">إضافة كورس طويل</a>
+        </div>
       </ul>
       <div class="card-title">المتدربين</div>
       <ul>

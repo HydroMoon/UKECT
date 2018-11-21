@@ -32,6 +32,4 @@ Route::get('contact-us', function () {
 })->name('contact');
 
 //Courses
-Route::get('short-courses', function () {
-    return view('courses.short');
-})->name('short');
+Route::resource('short-courses', 'ShortCourseController');

@@ -1,13 +1,15 @@
 @extends('app')
+@section('jum')
 
-@section('content')
-<div class="row">
-  <div class="col mx-auto my-4 primary-color">
-    <div class="">
-      <img class="img-fluid rounded" src="{{ asset('images/1542801916.jpg') }}" alt="">
-    </div>
+<div class="jumbotron jumbotron-fluid peach-gradient">
+  <div class="container">
+    <h1 class="display-4">الرئيسية</h1>
+    <p class="lead">افضل الكورسات البريطانية والامريكية</p>
   </div>
 </div>
+@endsection
+@section('content')
+
 <div class="row">
   <a class="col-sm btn btn-outline-warning waves-effect" href="#">الكورسات القصيرة</a>
 

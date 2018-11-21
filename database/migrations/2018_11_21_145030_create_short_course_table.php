@@ -15,6 +15,11 @@ class CreateShortCourseTable extends Migration
     {
         Schema::create('short_course', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('cname');
+            $table->string('price');
+            $table->string ('teacher');
+            $table->string('certificate');
+            $table->string('duration');
             $table->timestamps();
         });
     }
