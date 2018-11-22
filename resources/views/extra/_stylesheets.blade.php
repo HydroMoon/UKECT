@@ -6,8 +6,7 @@
   }
   body {
     background: #fff9c4 !important;
-    display: -ms-flexbox;
-    display: flex;
+    display: -ms-flexbox; 
     -ms-flex-direction: column;
     flex-direction: column;
     height: 100vh; /* Use height insted of min-height for IE 10/11. */

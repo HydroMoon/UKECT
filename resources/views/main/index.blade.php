@@ -25,7 +25,7 @@
         <div class="col-md-12">
           <a href="#">
             <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية" /></noscript>
+            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية"></noscript>
           </a>
         </div>
         <div class="col-md-12">
