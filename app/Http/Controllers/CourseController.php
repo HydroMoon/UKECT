@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Scourse;
 
-class ShortCourseController extends Controller
+class CourseController extends Controller
 {
 
     public function __construct()
@@ -21,7 +21,7 @@ class ShortCourseController extends Controller
     {
         $scourses = Scourse::all();
 
-        return view('short-courses.index')->withScourses($scourses);
+        return view('courses.index')->withScourses($scourses);
     }
 
     /**

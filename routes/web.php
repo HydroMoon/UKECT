@@ -32,4 +32,4 @@ Route::get('contact-us', function () {
 })->name('contact');
 
 //Courses
-Route::resource('short-courses', 'ShortCourseController');
+Route::resource('courses', 'CourseController');

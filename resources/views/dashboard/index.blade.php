@@ -10,24 +10,29 @@
       <ul>
         <div class="form-control">
           <a class="btn btn-default" href="#">الكورسات</a>
-          <a class="btn btn-default" href="#">إضافة كورس قصير</a>
-          <a class="btn btn-default" href="#">إضافة كورس طويل</a>
+          <a class="btn btn-default" href="#">إضافة الكورسات</a>
         </div>
       </ul>
       <div class="card-title">المتدربين</div>
       <ul>
-        <li class="nav-item">بيانات المتدربين</li>
-        <li class="nav-item">تاكيد التسجيل</li>
+        <div class="form-control">
+          <a class="btn btn-default" href="#">بيانات المسجلين</a>
+          <a class="btn btn-default" href="#">تأكيد التسجيل</a>
+        </div>
       </ul>
       <div class="card-title">المدونة</div>
       <ul>
-        <li class="nav-item"><a class="nav-link" href="{{ route('posts.index') }}">المنشورات</a></li>
-        <li class="nav-item">اضافة المنشورات</li>
+        <div class="form-control">
+          <a class="btn btn-default" href="{{ route('posts.index') }}">المنشورات</a>
+          <a class="btn btn-default" href="#">إضافة منشور</a>
+        </div>
       </ul>
       <div class="card-title">المستخدمين</div>
       <ul>
-        <li class="nav-item">اضافة مستخدم</li>
-        <li class="nav-item">حذف مستخدم</li>
+        <div class="form-control">
+          <a class="btn btn-default" href="#">إضافة مستخدم</a>
+          <a class="btn btn-default" href="#">عرض المستخدمين</a>
+        </div>
       </ul>
 
     </div>

@@ -36,10 +36,10 @@
             <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
             <td>
               <div class="row">
-                <div class="col-sm m-1">
+                <div class="col-sm-4 m-1">
                   <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-sm">فتح</a>
                 </div>
-                <div class="col-sm m-1">
+                <div class="col-sm-4 m-1">
                   <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">تعديل</a>
                 </div>
               </div>

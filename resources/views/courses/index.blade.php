@@ -38,9 +38,9 @@
         </tbody>
       </table>
 
-      <div class="text-center">
+      {{-- <div class="text-center">
         {!! $posts->links(); !!}
-      </div>
+      </div> --}}
     </div>
   </div>
 @endsection
