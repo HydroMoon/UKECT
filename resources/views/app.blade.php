@@ -12,8 +12,9 @@
       <div class="container">
         @include('extra._message')
         @yield('content')
-
       </div>
+
+      @yield('sec')
 
 
       @include('extra._footer')

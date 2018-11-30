@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark peach-gradient">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="{{ route('main') }}">المؤسسة البريطانية</a>
+  <a class="navbar-brand" href="{{ route('main') }}">{{ Request::is('courses') ? "مركز يوكيكت للتدريب" : "المؤسسة البريطانية" }}</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,13 @@
       <li class="nav-item {{ Request::is('/') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('main') }}">الرئيسية</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الكورسات</a>
+        <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">القصيرة</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">الطويلة</a>
+        </div>
+      </li>
       <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('blog') }}">المدونة</a>
       </li>
@@ -29,18 +36,28 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      @guest
-      <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-      @else
-      <!-- Dropdown -->
+      @if (Auth::guard('admin')->check())
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">لوحة التحكم</a>
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">لوحة التحكم</a>
+          <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="#">الكورسات</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="#">المتدربين</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+              تسجيل الخروج
+            </a>
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+          </div>
+        </li>
+      @elseif (Auth::guard('web')->check())
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الطلاب</a>
         <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
-          <a class="dropdown-item text-center waves-effect waves-light" href="#">الكورسات</a>
-          <a class="dropdown-item text-center waves-effect waves-light" href="#">المتدربين</a>
-          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
+          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.dash') }}">التسجيلات</a>
           <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
             تسجيل الخروج
@@ -48,15 +65,13 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
           </form>
-          @endguest
         </div>
       </li>
+      @else
+      <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">تسجيل</a></li>
+      @endif
     </ul>
-
-
-
-    <!-- Links -->
-    <!-- Collapsible content -->
 
 </nav>
 <!--/.Navbar-->

@@ -21,7 +21,7 @@
     <div class="card mb-4">
       <div class="card-body">
         <h2 class="card-title">{{ $post->title }}</h2>
-        <p class="card-text">{{ mb_substr(strip_tags($post->body), 0, 300) }}{{ strlen(strip_tags($post->body)) > 300 ? "..." : "" }}</p>
+        <p class="card-text">{{ mb_substr(strip_tags($post->body, '<br>'), 0, 300) }}{{ strlen(strip_tags($post->body)) > 300 ? "..." : "" }}</p>
         <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-primary">أقراء المزيد</a>
       </div>
       <div class="card-footer text-muted">

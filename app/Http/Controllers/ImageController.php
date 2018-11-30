@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Scourse;
+use App\Image;
 
-class CourseController extends Controller
+class ImageController extends Controller
 {
 
     public function __construct()
     {
-      $this->middleware('auth:admin');
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -19,18 +19,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('dashboard.short-courses');
+        return view('dashboard.image');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +31,25 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        $this->validate($request, array(
+            'img' => 'image'
+        ));
+
+        $images = new Image;
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('gallery/' . $filename);
+  
+            $images->image = $filename;
+          }
+
+        $images->save();
+
+
     }
 
     /**

@@ -9,7 +9,7 @@
       <div class="card-title">الكورسات</div>
       <ul>
         <div class="form-control">
-          <a class="btn btn-default" href="#">الكورسات</a>
+          <a class="btn btn-default" href="{{ route('courses.index') }}">الكورسات</a>
           <a class="btn btn-default" href="#">إضافة الكورسات</a>
         </div>
       </ul>

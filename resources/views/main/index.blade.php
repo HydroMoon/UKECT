@@ -1,275 +1,70 @@
 @extends('app')
 @section('jum')
-
-<div class="jumbotron jumbotron-fluid peach-gradient">
+<header>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <img class="carousel-item active img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <img class="carousel-item img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <img class="carousel-item img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+<div class="jumbotron jumbotron-fluid" style="background: #fff9c4;">
   <div class="container">
-    <h1 class="display-4">الرئيسية</h1>
-    <p class="lead">افضل الكورسات البريطانية والامريكية</p>
+    <h2>المؤسسة البريطانيه للإستشارات والتدريب</h2>
+    <p>المؤسسة العملاقة التي أنشئت للاسهام في مجالي التعليم والتدريب وتتميز بأنها تقدم برامج دولية علي مستوي عالي الجودة وبرامج محلية ودورات محلية تسهم في تدريب الفئات العاملة وغير العاملة</p>
   </div>
 </div>
 @endsection
+
+
 @section('content')
 
-<div class="row">
-  <a class="col-sm btn btn-outline-warning waves-effect" href="#">الكورسات القصيرة</a>
 
-  <a class="col-sm btn btn-outline-warning waves-effect" href="#">الكورسات الطويلة</a>
 
-  <a class="col-sm btn btn-outline-warning waves-effect" href="#">متابعة التسجيل</a>
-</div>
-<div class="row">
-  <div class="col border border-warning m-2">
-    <h2>الكورسات القصيرة</h2>
-    <div class="col-sm-3 m-2">
-      <div class="box-list">
-        <div class="col-md-12">
-          <a href="#">
-            <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية"></noscript>
-          </a>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12 m-1"><a href="#">دورات قصيرة المدى</a></div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-21</a></td>
-                </tr>
-                <tr>
-                  <td width="24"></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-25</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-flag-checkered" aria-hidden="true"></i></td>
-                  <td>
-                    <a href="#"> العربية </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-map-marker map-color" aria-hidden="true"></i></td>
-                  <td><a href="#">الاسكندرية<div class="clearfix"></div><span class="mutamayez-logo"></span></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-          <a href="#" class="btn btn-block btn-default">سجل الآن</a>
-      </div>
-    </div>
-    <div class="col-sm-3 m-2">
-      <div class="box-list">
-        <div class="col-md-12">
-          <a href="#">
-            <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية" /></noscript>
-          </a>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12 m-1"><a href="#">دورات قصيرة المدى</a></div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-21</a></td>
-                </tr>
-                <tr>
-                  <td width="24"></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-25</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-flag-checkered" aria-hidden="true"></i></td>
-                  <td>
-                    <a href="#"> العربية </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-map-marker map-color" aria-hidden="true"></i></td>
-                  <td><a href="#">الاسكندرية<div class="clearfix"></div><span class="mutamayez-logo"></span></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-          <a href="#" class="btn btn-block btn-default">سجل الآن</a>
-      </div>
-    </div>
-    <div class="col-sm-3 m-2">
-      <div class="box-list">
-        <div class="col-md-12">
-          <a href="#">
-            <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية" /></noscript>
-          </a>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12 m-1"><a href="#">دورات قصيرة المدى</a></div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-21</a></td>
-                </tr>
-                <tr>
-                  <td width="24"></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-25</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-flag-checkered" aria-hidden="true"></i></td>
-                  <td>
-                    <a href="#"> العربية </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-map-marker map-color" aria-hidden="true"></i></td>
-                  <td><a href="#">الاسكندرية<div class="clearfix"></div><span class="mutamayez-logo"></span></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-          <a href="#" class="btn btn-block btn-default">سجل الآن</a>
-      </div>
-    </div>
-    <div class="col-sm-3 m-2">
-      <div class="box-list">
-        <div class="col-md-12">
-          <a href="#">
-            <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية" /></noscript>
-          </a>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12 m-1"><a href="#">دورات قصيرة المدى</a></div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-21</a></td>
-                </tr>
-                <tr>
-                  <td width="24"></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-25</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-flag-checkered" aria-hidden="true"></i></td>
-                  <td>
-                    <a href="#"> العربية </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-map-marker map-color" aria-hidden="true"></i></td>
-                  <td><a href="#">الاسكندرية<div class="clearfix"></div><span class="mutamayez-logo"></span></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-          <a href="#" class="btn btn-block btn-default">سجل الآن</a>
-      </div>
-    </div>
-    <div class="col-sm-3 m-2">
-      <div class="box-list">
-        <div class="col-md-12">
-          <a href="#">
-            <img data-src="https://leadersuae.net/storage/courses/oct2018/9-small.png" src="https://leadersuae.net/storage/courses/oct2018/9-small.png" class="img-fluid rounded" alt="البرنامج العملي الشامل&quot;عقودالفيديك والتحكيم&quot;">
-            <noscript><img src="https://leadersuae.net/storage/courses/oct2018/9.png" alt="هندسة القوى الكهربية" /></noscript>
-          </a>
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-12 m-1"><a href="#">دورات قصيرة المدى</a></div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-21</a></td>
-                </tr>
-                <tr>
-                  <td width="24"></td>
-                  <td><a href="#" style="font-family:tahoma;">2018-12-25</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-flag-checkered" aria-hidden="true"></i></td>
-                  <td>
-                    <a href="#"> العربية </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="24"><i class="fa fa-map-marker map-color" aria-hidden="true"></i></td>
-                  <td><a href="#">الاسكندرية<div class="clearfix"></div><span class="mutamayez-logo"></span></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-          <a href="#" class="btn btn-block btn-default">سجل الآن</a>
-      </div>
-    </div>
+{{-- <div class="row">
+  <div class="col-sm">
+    <h1>lorem ipsum</h1>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ratione nostrum, adipisci explicabo ad, a facilis inventore qui nulla, eius vitae distinctio sunt! Hic aperiam libero impedit rem, itaque repellendus!
   </div>
-</div>
+  <div class="col-sm">
+    <h1>lorem ipsum</h1>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, et similique sed laboriosam autem dolorem modi? Cumque, dolorem? Voluptas reiciendis consequuntur sunt quos voluptatibus quo id repellendus harum ab perspiciatis.
+  </div>
+</div> --}}
+
+@endsection
+
+@section('sec')
+    <section>
+      <div class="container">
+          <div class="row">
+              <a class="col-sm btn btn-outline-warning waves-effect" href="{{ route('short') }}">الكورسات القصيرة</a>
+            
+              <a class="col-sm btn btn-outline-warning waves-effect" href="{{ route('long') }}">الكورسات الطويلة</a>
+            
+              <a class="col-sm btn btn-outline-warning waves-effect" href="#">متابعة التسجيل</a>
+            </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="row"></div>
+    </section>
 @endsection
