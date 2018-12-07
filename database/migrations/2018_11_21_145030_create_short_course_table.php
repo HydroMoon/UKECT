@@ -20,6 +20,7 @@ class CreateShortCourseTable extends Migration
             $table->string ('teacher');
             $table->string('certificate');
             $table->string('duration');
+            $table->string('info');
             $table->timestamps();
         });
     }

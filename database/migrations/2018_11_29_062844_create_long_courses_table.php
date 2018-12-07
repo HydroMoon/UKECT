@@ -13,9 +13,16 @@ class CreateLongCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('long_course', function (Blueprint $table) {
+        Schema::create('long_course', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cname');
+            $table->string('ctype');
+            $table->string ('price');
+            $table->string ('teacher');
+            $table->string('certificate');
+            $table->string('duration');
+            $table->string('info');
+            $table->timestamps();
         });
     }
 

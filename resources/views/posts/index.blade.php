@@ -28,9 +28,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($posts as $post)
+          @foreach ($posts as $key=>$post)
           <tr>
-            <th>{{ $post->id }}</th>
+            <td>{{ $key }}</td>
             <td>{{ $post->title }}</td>
             <td>{{ mb_substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
             <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>

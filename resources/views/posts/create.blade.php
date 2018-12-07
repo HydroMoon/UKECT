@@ -40,6 +40,7 @@
         <label>النص</label>
         <textarea wrap="hard" name="body" rows="8" cols="80"></textarea>
       </div>
+      <input name="uname" type="hidden" value="{{ Auth::user()->name }}">
       <div class="form-group">
         <button type="submit" class="btn btn-primary">اضافة منشور</button>
       </div>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-lg-8 my-4">
+  <div class="col-lg-8 my-3">
     <div class="card">
       <div class="card-header">لمراسلتنا</div>
       <div class="card-body">
@@ -28,7 +28,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="card my-4">
+    <div class="card my-3">
       <div class="card-header">للتواصل معنا</div>
       <div class="card-body">
         <dl class="dl-horizontal mb-2">

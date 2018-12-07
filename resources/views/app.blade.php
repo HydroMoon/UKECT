@@ -4,12 +4,12 @@
       @include('extra._head')
       @include('extra._stylesheets')
     </head>
-    <body>
+    <body class="Site">
       @include('extra._nav')
 
       @yield('jum')
 
-      <div class="container">
+      <div class="container Site-content">
         @include('extra._message')
         @yield('content')
       </div>

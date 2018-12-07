@@ -3,22 +3,16 @@
 * {
   font-family: 'Droid Arabic Kufi', serif;
 }
-body {
-  display: -ms-flexbox; 
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100vh; /* Use height insted of min-height for IE 10/11. */
-}
-main {
-  /* Prevent shrinking the main area in IE 10/11. */
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-.footer {
-  padding: 1rem 0;
-  margin-top: auto;
-  background-color: #f5f5f5;
-}
+
+.Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .Site-content {
+    flex: 1;
+  }
 
 
 /* Custom page CSS
@@ -161,4 +155,29 @@ main {
   }
   .slick-arrow.slick-hidden {
       display: none;
+  }
+
+  /* Social */
+  .social {
+    -webkit-transform: scale(0.8);
+    /* Browser Variations: */
+    
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+  }
+
+  #social-fb {
+    color: #3B5998;
+  }
+  
+  #social-tw {
+    color: #4099FF;
+  }
+  
+   #social-gp {
+    color: #d34836;
+  }
+  
+   #social-em {
+    color: #f39c12;
   }

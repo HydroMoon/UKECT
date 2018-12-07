@@ -57,6 +57,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->body = Purifier::clean($request->body);
+        $post->uname = $request->uname;
 
         if ($request->hasFile('front_image')) {
           $image = $request->file('front_image');

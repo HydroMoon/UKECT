@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //use App\Scourse;
+use App\Reg;
+use App\Lcourse;
+use App\Scourse;
 
 class CourseController extends Controller
 {
@@ -17,8 +20,9 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
+
         return view('dashboard.short-courses');
     }
 
@@ -27,9 +31,23 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createShort()
     {
-        //
+        $short = new Scourse;
+
+        $short = Scourse::all();
+
+        return view('dashboard.short-courses')->with(['data' => $short]);
+    }
+
+    public function createLong()
+    {
+
+        $long = new Lcourse;
+
+        $long = Lcourse::all();        
+
+        return view('dashboard.long-courses')->with(['data' => $long]);
     }
 
     /**
@@ -38,9 +56,14 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeShort(Request $request)
     {
-        //
+       
+    }
+
+    public function storeLong(Request $request)
+    {
+       
     }
 
     /**

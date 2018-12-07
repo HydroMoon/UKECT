@@ -20,8 +20,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الكورسات</a>
         <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">القصيرة</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">الطويلة</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">قصيرة الامد</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">طويلة الامد</a>
         </div>
       </li>
       <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
@@ -42,7 +42,7 @@
           <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="#">الكورسات</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="#">المتدربين</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('users') }}">المتدربين</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">

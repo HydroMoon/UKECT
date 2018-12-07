@@ -13,9 +13,9 @@
 
     <!-- Author -->
     <p class="lead">
-      by
-      <a href="#">Start Bootstrap</a>
-    </p>
+        تم النشر بواسطة
+        <a href="#">{{ $post->uname }}</a>
+      </p>
 
     <hr>
 

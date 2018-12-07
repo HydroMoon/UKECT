@@ -11,5 +11,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @yield('stylee')

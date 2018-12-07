@@ -8,11 +8,11 @@
                 <div class="card-header">تسجيل الكورسات الطويلة</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form id="reg-form" class="form-horizontal" method="POST" action="{{ route('user.long.submit') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="control-label">الأسم رباعي</label>
+                        <div class="form-group">
+                            <label for="name">الأسم رباعي</label>
 
 
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -25,11 +25,38 @@
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" class="control-label">الهاتف</label>
+                        <div class="form-group date" data-date="02-02-2000" data-date-format="dd-mm-yyyy">
+                                <label for="dob">تاريخ الميلاد</label>
+    
+    
+                                    <input id="dob" class="form-control datepicker" name="dob" value="02-02-2000" required>
+    
+                                    @if ($errors->has('dob'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+    
+                            </div>
+                            <div class="form-group">
+                                    <label for="inputState">الجنس</label>
+                                    <select name="sex" id="inputState" class="form-control">
+                                      <option value="ذكر" selected>ذكر</option>
+                                      <option value="انثى">انثى</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="nationality">الجنسية</label>
+
+                                      <input class="form-control" type="text" name="nationality">
+                                  </div>
+
+                        <div class="form-group">
+                            <label for="phone">الهاتف</label>
 
 
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ $user->phone }}" required>
 
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -40,10 +67,24 @@
                         </div>
 
                         <div class="form-group">
+                                <label for="email">البريد الإلكتروني</label>
+    
+    
+                                    <input id="email" type="text" class="form-control" name="email" value="{{ $user->email }}" required>
+    
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+    
+                            </div>
+
+                        <div class="form-group">
                                 <label for="inputState">التخصصات</label>
-                                <select id="inputState" class="form-control">
+                                <select id="inputState" class="form-control" name="scourse_id">
                                   <option selected>اختيار التخصص</option>
-                                  <option>دبلوم</option>
+                                  <option value="1">دبلوم</option>
                                   <option>بكلاريوس</option>
                                   <option>ماجستير</option>
                                   <option>دكتوراة</option>
@@ -63,7 +104,7 @@
 
 
                         <div class="form-group">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AppModel">
                                     تسجيل
                                 </button>
                         </div>
@@ -74,11 +115,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AppModel" tabindex="-1" role="dialog" aria-labelledby="AppModelLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">تأكيد</h5>
+              <h5 class="modal-title" id="AppModelLabel">تأكيد</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -87,9 +128,10 @@
               هل انت متاكد من التسجيل
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
-              <button type="button" class="btn btn-success">نعم</button>
-            </div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-success" onclick="event.preventDefault();
+                document.getElementById('reg-form').submit();">نعم</button>
+              </div>
           </div>
         </div>
       </div>

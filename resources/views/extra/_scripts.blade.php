@@ -3,16 +3,21 @@
 <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 
 <script>
 $(document).ready(function(){
 	
+    $('.datepicker').datepicker({
+        format:'yyyy-mm-dd'
+    });
+
     $('.customer-logos').slick({
         slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 100,
+        autoplaySpeed: 1000,
         arrows: false,
         dots: false,
         pauseOnHover: false,

@@ -9,14 +9,21 @@
       <div class="card-title">الكورسات</div>
       <ul>
         <div class="form-control">
-          <a class="btn btn-default" href="{{ route('courses.index') }}">الكورسات</a>
+          <a class="btn btn-default" href="{{ route('admin.courses') }}">الكورسات</a>
           <a class="btn btn-default" href="#">إضافة الكورسات</a>
+        </div>
+      </ul>
+      <div class="card-title">المعلمين</div>
+      <ul>
+        <div class="form-control">
+          <a class="btn btn-default" href="#">المعلمين</a>
+          <a class="btn btn-default" href="#">إضافة المعلمين</a>
         </div>
       </ul>
       <div class="card-title">المتدربين</div>
       <ul>
         <div class="form-control">
-          <a class="btn btn-default" href="#">بيانات المسجلين</a>
+          <a class="btn btn-default" href="{{ route('users') }}">بيانات المسجلين</a>
           <a class="btn btn-default" href="#">تأكيد التسجيل</a>
         </div>
       </ul>
@@ -24,7 +31,7 @@
       <ul>
         <div class="form-control">
           <a class="btn btn-default" href="{{ route('posts.index') }}">المنشورات</a>
-          <a class="btn btn-default" href="#">إضافة منشور</a>
+          <a class="btn btn-default" href="{{ route('posts.create') }}">إضافة منشور</a>
         </div>
       </ul>
       <div class="card-title">المستخدمين</div>

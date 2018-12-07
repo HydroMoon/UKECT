@@ -5,7 +5,7 @@
 @endif
 
 @if (count($errors) > 0)
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger mt-4" role="alert">
     <strong>Error:</strong>
     <ul>
     @foreach ($errors->all() as $error)

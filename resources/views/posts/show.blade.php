@@ -10,7 +10,7 @@
 
     <p class="lead">
       تم النشر بواسطة
-      <a href="#">د. قاسم محمد</a>
+      <a href="#">{{ $post->uname }}</a>
     </p>
     <hr>
     <p>Posted on January 1, 2018 at 12:00 PM</p>

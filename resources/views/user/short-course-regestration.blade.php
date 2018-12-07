@@ -8,8 +8,11 @@
                 <div class="card-header">تسجيل الكورسات القصيرة</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form id="reg-form" class="form-horizontal" method="POST" action="{{ route('user.short.submit') }}">
                         {{ csrf_field() }}
+                        
+                        <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
+                        <input name="course_id" type="hidden" value="1">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="control-label">الأسم رباعي</label>
@@ -50,7 +53,7 @@
 
 
                         <div class="form-group">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmModal">
                                     تسجيل
                                 </button>
                         </div>
@@ -61,11 +64,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">تأكيد</h5>
+              <h5 class="modal-title" id="ConfirmModalLabel">تأكيد</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -75,7 +78,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
-              <button type="button" class="btn btn-success">نعم</button>
+              <button type="button" class="btn btn-success" onclick="event.preventDefault();
+              document.getElementById('reg-form').submit();">نعم</button>
             </div>
           </div>
         </div>
