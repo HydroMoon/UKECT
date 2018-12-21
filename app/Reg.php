@@ -13,7 +13,7 @@ class Reg extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function scourses()
+    public function scourse()
     {
         return $this->belongsTo('App\Scourse');
     }

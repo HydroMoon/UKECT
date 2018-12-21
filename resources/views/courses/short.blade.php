@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+الكورسات قصيرة الامد
+@endsection
 @section('jum')
 
 <div class="jumbotron jumbotron-fluid peach-gradient">
@@ -16,15 +18,24 @@
 <div class="row">
   <div class="col-sm mb-4">
     <section class="customer-logos slider" dir="ltr">
-      <div class="slide"><img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
-      <div class="slide"><img src="http://www.webcoderskull.com/img/logo.png"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/background-of-spots-halftone_1035-3847.jpg"></div>
-      <div class="slide"><img src="https://image.freepik.com/free-vector/retro-label-on-rustic-background_82147503374.jpg"></div>
+      @foreach ($short as $item)
+      <div class="slide">
+          <div class="card card-default slide-card">
+            <div class="card-body">
+              <h5 class="text-center">{{ $item->cname }}</h5>
+              <div>
+                <p>{{ $item->teacher }}</p>
+                <p>السعر: {{ $item->price }} جنيه</p>
+                <hr>
+                <p class="text-center">من {{ $item->start }}</p>
+                
+                <p class="text-center">الى {{ $item->finish }}</p>
+              </div>
+              <a class="btn btn-secondary btn-block m-1" href="{{ route('user.short') }}">سجل الان</a>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </section>
   </div>
 </div>
@@ -33,7 +44,7 @@
 
 @endsection
 
-@section('sec')
+@section('sec2')
 <section class="" style="background: #f9f9f9; border: 1px solid #e6e6e6;">
   <div class="container">
     <div class="row">

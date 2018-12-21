@@ -1,19 +1,34 @@
 @extends('app')
+@section('title')
+الرئيسية
+@endsection
 @section('jum')
 <header>
-  <div id="Slider" class="carousel slide" data-ride="carousel">
+  <div class="owl-car" dir="ltr">
+      @foreach ($imgs as $key=>$item)
+      <div>
+        <img class="img-fluid" src="{{ asset('gallery/' . $item->image) }}">
+      </div>
+      @endforeach
+  </div>
+  {{-- <div id="Slider" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li data-target="#Slider" data-slide-to="0" class="active"></li>
-      <li data-target="#Slider" data-slide-to="1"></li>
-      <li data-target="#Slider" data-slide-to="2"></li>
+      @foreach ($imgs as $key=>$item)
+        @if ($key == 0)
+          <li data-target="#Slider" data-slide-to="{{ $key }}" class="active"></li>       
+        @else
+          <li data-target="#Slider" data-slide-to="{{ $key }}"></li>
+        @endif
+        @endforeach
     </ol>
     <div class="carousel-inner" role="listbox">
-      <!-- Slide One - Set the background image for this slide in the line below -->
-      <img class="carousel-item active img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
-      <!-- Slide Two - Set the background image for this slide in the line below -->
-      <img class="carousel-item img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
-      <!-- Slide Three - Set the background image for this slide in the line below -->
-      <img class="carousel-item img-fluid" src="https://leadersuae.net/storage/slides/June2018/KFoC5DzkDy5YBKwihGA7.jpg">
+        @foreach ($imgs as $key=>$item)
+        @if ($key == 0)
+          <img class="carousel-item active img-fluid" src="{{ asset('gallery/' . $item->image) }}">
+        @else
+          <img class="carousel-item img-fluid" src="{{ asset('gallery/' . $item->image) }}">
+        @endif
+        @endforeach
     </div>
     <a class="carousel-control-prev" href="#Slider" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -23,7 +38,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+  </div> --}}
 </header>
 <div class="jumbotron jumbotron-fluid" style="background: #fff9c4;">
   <div class="container">
@@ -47,7 +62,7 @@
             
               <a class="col-sm btn btn-outline-warning waves-effect" href="{{ route('long') }}">الكورسات طويلة الامد</a>
             
-              <a class="col-sm btn btn-outline-warning waves-effect" href="#">متابعة التسجيل</a>
+              <a class="col-sm btn btn-outline-warning waves-effect" href="{{ route('user.dash') }}">متابعة التسجيل</a>
             </div>
       </div>
     </section>
@@ -55,7 +70,22 @@
     <section style="background: #f9f9f9; border: 1px solid #e6e6e6;">
       <div class="container">
         <div class="row">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero dolorem velit quis harum maxime. Ea possimus, voluptas fuga non impedit voluptatum sequi deserunt totam a nihil illo labore perferendis.
+            <div class="col-sm m-2">
+                <br>
+                <h3 class="text-center">الممثل الإقليمي المعتمد لكل من</h3>
+                <p class="text-center">
+                        كلية ليفربول التقنية
+                        <br>
+                        جامعة ميتشجان الامريكية
+                    </p>
+                <hr>
+                <p>برنامج الدبلوم التقني الدولي من كلية ليفربول التقنية حيث يعد هذا البرنامج من أهم برامج التاهيل
+                    التخصصي الاحترافي فهو يعمل علي إعداد تقنيين متخصصين ومزودين بالمعارف النظرية والتطبيقية ممايجعلهم
+                    أكثر طلباً في سوق العمل ، كما أن هذا البرنامج يتيح ايضا فرصة التصعيد للحصول علي شهادة أعلي
+                    كالبكالوريوس الدولي علماً بأن فترة دراسة الدبلوم عامان دراسيان متصلات (12 شهراً) يتلقي الطالب فيهما
+                    دراسة مكثفة.</p>
+            </div>
+            
         </div>
       </div>
     </section>

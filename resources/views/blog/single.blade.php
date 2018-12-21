@@ -14,13 +14,15 @@
     <!-- Author -->
     <p class="lead">
         تم النشر بواسطة
-        <a href="#">{{ $post->uname }}</a>
+       {{ $post->uname }}
       </p>
 
     <hr>
 
     <!-- Date/Time -->
-    <p>Posted on January 1, 2018 at 12:00 PM</p>
+    <p><div class="" style="direction:ltr;">
+        ({{ date_format($post->created_at, 'd/m/Y g:i A') }}) تم النشر في
+      </div></p>
 
     <hr>
 
@@ -30,12 +32,29 @@
     <hr>
     {!! $post->body !!}
 
+    <div class="ssk-group text-center" dir="ltr">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank" class="ssk ssk-facebook"></a>
+    </div>
   </div>
-  <div class="col-md-4">
-    <div class="card my-4">
+
+  <div class="col-md-4 mb-4 mt-4">
+    <div class="card">
       <h5 class="card-header">الوسائط</h5>
       <div class="card-body">
+        @if (empty($imgs))
         سوف تكون جميع الوسائط موجودة هنا
+        @else
+        <div class="media-main slider" dir="ltr">
+            @foreach ($imgs as $item)
+            <a href="{{ asset('gallery/' . $item->image) }}" data-toggle="lightbox" data-gallery="example-gallery"
+                class="col-sm-4">
+                <div class="thumbnail m-2 slide">
+                    <img src="{{ asset('gallery/' . $item->image) }}" class="img-fluid img-thumbnail">
+                </div>
+            </a>
+            @endforeach
+        </div>
+        @endif
       </div>
     </div>
   </div>

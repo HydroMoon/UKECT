@@ -10,10 +10,12 @@
 
     <p class="lead">
       تم النشر بواسطة
-      <a href="#">{{ $post->uname }}</a>
+      {{ $post->uname }}
     </p>
     <hr>
-    <p>Posted on January 1, 2018 at 12:00 PM</p>
+    <p><div class="" style="direction:ltr;">
+        ({{ date_format($post->created_at, 'd/m/Y g:i A') }}) تم النشر في
+      </div></p>
 
     <hr>
 

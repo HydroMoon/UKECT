@@ -7,6 +7,8 @@ use Session;
 use App\Reg;
 use App\Regs;
 use App\User;
+use App\Scourse;
+use App\Lcourse;
 use Auth;
 
 class UserController extends Controller
@@ -21,9 +23,26 @@ class UserController extends Controller
         return view('user.dash');
     }
 
+    public function getCourses()
+    {
+        $short = new Reg;
+        $short = Reg::where('user_id', Auth::user()->id)->get();
+
+        $long = new Regs;
+        $long = Regs::where('user_id', Auth::user()->id)->get();
+
+        return view('user.courses')->with(['long' => $long, 'short' => $short]);
+    }
+
     public function getShort()
     {
-        return view('user.short-course-regestration');
+        $user = new User;
+        $user = User::find(Auth::user()->id);
+
+        $short_courses = new Scourse;
+        $short_courses = Scourse::all();
+
+        return view('user.short-course-regestration')->with(['user' => $user, 'shortc' => $short_courses]);
     }
 
     public function getLong()
@@ -31,18 +50,22 @@ class UserController extends Controller
         $user = new User;
         $user = User::find(Auth::user()->id);
 
-        return view('user.long-course-regestration')->withUser($user);
+        $long_courses = new Lcourse;
+        $long_courses = Lcourse::all();
+
+        return view('user.long-course-regestration')->with(['user' => $user, 'longc' => $long_courses]);
     }
 
     public function storeShort(Request $request)
     {
          //Validate
-        //  $this->validate($request, array(
-        //     'title' => 'required|max:255',
-        //     'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-        //     'body' => 'required',
-        //     'front_image' => 'sometimes|image'
-        //   ));
+         $this->validate($request, array(
+            'name' => 'required|string|max:255',
+            'dob' => 'required|date_format:Y-m-d',
+            'nationality' => 'required|string',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|string|email|max:255',
+          ));
 
           //save info into database
 
@@ -57,26 +80,27 @@ class UserController extends Controller
           $reg->phone = $request->phone;
           $reg->email = $request->email;
 
-          $reg->scourses()->associate($request->scourse_id);
+          $reg->scourse()->associate($request->scourse_id);
           $reg->user()->associate($user);
   
   
           $reg->save();
   
-          Session::flash('success', 'Course registered successfuly');
+          Session::flash('success', __('trans.short_user_reg'));
   
           return redirect()->route('user.dash');
     }
 
     public function storeLong(Request $request)
     {
-         //Validate
-        //  $this->validate($request, array(
-        //     'title' => 'required|max:255',
-        //     'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-        //     'body' => 'required',
-        //     'front_image' => 'sometimes|image'
-        //   ));
+        //Validate
+         $this->validate($request, array(
+            'name' => 'required|string|max:255',
+            'dob' => 'required|date_format:Y-m-d',
+            'nationality' => 'required|string',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|string|email|max:255',
+          ));
 
           //save info into database
 
@@ -91,13 +115,13 @@ class UserController extends Controller
           $reg->phone = $request->phone;
           $reg->email = $request->email;
           
-          $reg->lcourses()->associate($request->lcourse_id);
+          $reg->lcourse()->associate($request->lcourse_id);
           $reg->user()->associate($user);
   
   
           $reg->save();
   
-          Session::flash('success', 'Course registered successfuly');
+          Session::flash('success', __('trans.long_user_reg'));
   
           return redirect()->route('user.dash');
     }

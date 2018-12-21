@@ -13,7 +13,7 @@ class Regs extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function lcourses()
+    public function lcourse()
     {
         return $this->belongsTo('App\Lcourse');
     }

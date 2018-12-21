@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Image;
+use Image as IM;
+use Session;
+use Storage;
 
 class ImageController extends Controller
 {
@@ -19,7 +22,18 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('dashboard.image');
+        $image = new Image;
+        $image = Image::where('cover', 1)->get();
+
+        return view('dashboard.image')->with(['imgs' => $image]);
+    }
+
+    public function media()
+    {
+        $image = new Image;
+        $image = Image::where('cover', 0)->get();
+
+        return view('dashboard.mymedia')->with(['imgs' => $image]);
     }
 
 
@@ -32,9 +46,9 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         
-
         $this->validate($request, array(
-            'img' => 'image'
+            'img' => 'image',
+            'cover' => 'numeric'
         ));
 
         $images = new Image;
@@ -43,13 +57,42 @@ class ImageController extends Controller
             $image = $request->file('img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('gallery/' . $filename);
-  
+            IM::make($image)->resize(750, 300)->save($location);
             $images->image = $filename;
+            $images->cover = $request->cover;
           }
 
         $images->save();
 
+        Session::flash('success', __('trans.img_cover'));
 
+        return redirect()->back();
+    }
+
+    public function storeMedia(Request $request)
+    {
+        
+        $this->validate($request, array(
+            'img' => 'image',
+            'cover' => 'numeric'
+        ));
+
+        $images = new Image;
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('gallery/' . $filename);
+            IM::make($image)->save($location);
+            $images->image = $filename;
+            $images->cover = $request->cover;
+          }
+
+        $images->save();
+
+        Session::flash('success', __('trans.img_cover'));
+
+        return redirect()->back();
     }
 
     /**
@@ -94,6 +137,14 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::find($id);
+
+        Storage::delete($image->image);
+
+        $image->delete();
+
+        Session::flash('success', __('trans.img_cover_delete'));
+
+        return redirect()->back();
     }
 }

@@ -13,7 +13,7 @@ class AddRegCourseLong extends Migration
      */
     public function up()
     {
-        Schema::table('reg_l_course', function (Blueprint $table) {
+        Schema::create('reg_l_course', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->date('dob');
@@ -43,7 +43,7 @@ class AddRegCourseLong extends Migration
     public function down()
     {
         Schema::table('reg_l_course', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('reg_l_course');
         });
     }
 }

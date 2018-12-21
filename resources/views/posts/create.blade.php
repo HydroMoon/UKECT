@@ -1,4 +1,7 @@
 @extends('dash')
+@section('title')
+إضافة منشور جديد
+@endsection
 @section('stylee')
 <script src="{!! asset('js/tinymce/tinymce.min.js') !!}"></script>
 <script>tinymce.init({

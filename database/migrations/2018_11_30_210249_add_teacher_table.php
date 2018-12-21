@@ -19,7 +19,7 @@ class AddTeacherTable extends Migration
             $table->string('university');
             $table->string ('major');
             $table->string ('level');
-            $table->string('info');
+            $table->text('info');
             $table->timestamps();
 
         });

@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-{{ 'المدونة' }}
+المدونة
 @endsection
 @section('jum')
 
@@ -27,7 +27,6 @@
       <div class="card-footer text-muted">
         <div class="" style="direction:ltr;">
           ({{ date_format($post->created_at, 'd/m/Y g:i A') }}) تم النشر في
-          {{-- <a href="#">Start Bootstrap</a> --}}
         </div>
       </div>
     </div>
@@ -46,10 +45,24 @@
     <div class="card">
       <h5 class="card-header">الوسائط</h5>
       <div class="card-body">
+        @if (empty($imgs))
         سوف تكون جميع الوسائط موجودة هنا
+        @else
+        <div class="media-main slider" dir="ltr">
+            @foreach ($imgs as $item)
+            <a href="{{ asset('gallery/' . $item->image) }}" data-toggle="lightbox" data-gallery="example-gallery"
+                class="col-sm-4">
+                <div class="thumbnail m-2 slide">
+                    <img src="{{ asset('gallery/' . $item->image) }}" class="img-fluid img-thumbnail">
+                </div>
+            </a>
+            @endforeach
+        </div>
+        @endif
       </div>
     </div>
   </div>
 
 </div>
 @endsection
+

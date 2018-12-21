@@ -27,6 +27,9 @@
       <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('blog') }}">المدونة</a>
       </li>
+      <li class="nav-item {{ Request::is('media') ? "active" : "" }}">
+          <a class="nav-link" href="{{ route('media') }}">الوسائط</a>
+        </li>
       <li class="nav-item {{ Request::is('about') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('about') }}">عن المؤسسة</a>
       </li>
@@ -41,9 +44,12 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">لوحة التحكم</a>
           <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="#">الكورسات</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('users') }}">المتدربين</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.courses') }}">الكورسات</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.teacher') }}">المدرسين</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('users') }}">المسجلين</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.image') }}">صور الغلاف</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.message') }}">الرسائل</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
               تسجيل الخروج
@@ -55,9 +61,10 @@
         </li>
       @elseif (Auth::guard('web')->check())
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الطلاب</a>
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
         <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.dash') }}">التسجيلات</a>
+          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.dash') }}">لوحة المتابعة</a>
+          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.courses') }}">التسجيلات</a>
           <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
             تسجيل الخروج

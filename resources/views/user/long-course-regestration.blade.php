@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+التسجيل في الكورسات الطويلة
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -16,26 +18,14 @@
 
 
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-
                         </div>
 
-                        <div class="form-group date" data-date="02-02-2000" data-date-format="dd-mm-yyyy">
+                        <div class="form-group date" data-date="2000-02-02" data-date-format="yyyy-mm-dd">
                                 <label for="dob">تاريخ الميلاد</label>
     
     
-                                    <input id="dob" class="form-control datepicker" name="dob" value="02-02-2000" required>
+                                    <input id="dob" class="form-control datepicker" name="dob" required>
     
-                                    @if ($errors->has('dob'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('phone') }}</strong>
-                                        </span>
-                                    @endif
     
                             </div>
                             <div class="form-group">
@@ -49,7 +39,7 @@
                                   <div class="form-group">
                                       <label for="nationality">الجنسية</label>
 
-                                      <input class="form-control" type="text" name="nationality">
+                                      <input class="form-control" type="text" name="nationality" required>
                                   </div>
 
                         <div class="form-group">
@@ -58,11 +48,6 @@
 
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ $user->phone }}" required>
 
-                                @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
 
                         </div>
 
@@ -72,33 +57,18 @@
     
                                     <input id="email" type="text" class="form-control" name="email" value="{{ $user->email }}" required>
     
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
+
     
                             </div>
 
-                        <div class="form-group">
-                                <label for="inputState">التخصصات</label>
-                                <select id="inputState" class="form-control" name="scourse_id">
-                                  <option selected>اختيار التخصص</option>
-                                  <option value="1">دبلوم</option>
-                                  <option>بكلاريوس</option>
-                                  <option>ماجستير</option>
-                                  <option>دكتوراة</option>
-                                </select>
-                              </div>
 
                               <div class="form-group">
                                     <label for="inputState">البرامج المتاحة</label>
-                                    <select id="inputState" class="form-control">
+                                    <select id="inputState" class="form-control" name="lcourse_id">
                                       <option selected>اختيار البرنامج</option>
-                                      <option>علوم حاسوب</option>
-                                      <option>هندسةاتصالات</option>
-                                      <option>هندسة شبكات</option>
-                                      <option>إدارة أعمال</option>
+                                      @foreach ($longc as $item)
+                                          <option value="{{ $item->id }}">{{ $item->ctype }}: {{ $item->cname }}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 

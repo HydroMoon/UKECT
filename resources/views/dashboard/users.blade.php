@@ -1,7 +1,7 @@
 @extends('app')
-
-
-
+@section('title')
+المسجلين
+@endsection
 @section('content')
 <div class="card mt-3 mb-3">
     <div class="card-header">بيانات المسجلين</div>
@@ -30,7 +30,21 @@
                             </div>
                             <div class="col-sm-4 m-1">
                                 <a class="btn btn-default" href="{{ route('users.single.long', $user->id) }}">الطويلة</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="dropdown col-sm-4 m-1">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    تسجيل
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('users.inside.short', $user->id) }}">كورس قصير</a>
+                                    <a class="dropdown-item" href="{{ route('users.inside.long', $user->id) }}">كورس طويل</a>
                                 </div>
+                            </div>
                         </div>
                     </td>
                 </tr>

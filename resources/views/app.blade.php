@@ -9,13 +9,16 @@
 
       @yield('jum')
 
+      @yield('sec')
+      
       <div class="container Site-content">
         @include('extra._message')
         @yield('content')
       </div>
 
-      @yield('sec')
 
+      @yield('sec2')
+     
 
       @include('extra._footer')
       @include('extra._scripts')

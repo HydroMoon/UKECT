@@ -19,8 +19,9 @@ class CreateShortCourseTable extends Migration
             $table->string('price');
             $table->string ('teacher');
             $table->string('certificate');
-            $table->string('duration');
-            $table->string('info');
+            $table->text('info');
+            $table->date('start');
+            $table->date('finish');
             $table->timestamps();
         });
     }

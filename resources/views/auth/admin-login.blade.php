@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+تسجيل دخول المسؤولين
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -12,31 +14,19 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="control-label">البريد الإلكتروني</label>
+                            <label for="email">البريد الإلكتروني</label>
 
-                            <div>
+                            
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="control-label">كلمة السر</label>
+                            <label for="password">كلمة السر</label>
 
-                            <div>
+
                                 <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
 
                         <div class="form-group">
@@ -51,13 +41,9 @@
 
                         <div class="form-group">
                             <div>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-default">
                                     تسجيل الدخول
                                 </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    هل نسيت كلمة السر؟
-                                </a>
                             </div>
                         </div>
                     </form>

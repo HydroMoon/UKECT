@@ -70,7 +70,7 @@ class PostController extends Controller
 
         $post->save();
 
-        Session::flash('success', 'Post completed successfuly');
+        Session::flash('success', __('trans.post_add'));
 
         return redirect()->route('posts.show', $post->id);
     }
@@ -150,7 +150,7 @@ class PostController extends Controller
       $post->save();
 
       // set flash data with success message
-      Session::flash('success', 'This post was successfully saved.');
+      Session::flash('success', __('trans.post_edit'));
 
       // redirect with flash data to posts.show
       return redirect()->route('posts.show', $post->id);
@@ -170,7 +170,7 @@ class PostController extends Controller
 
       $post->delete();
 
-      Session::flash('success', 'The post was successfully deleted.');
+      Session::flash('success', __('trans.post_delete'));
       return redirect()->route('posts.index');
     }
 }
