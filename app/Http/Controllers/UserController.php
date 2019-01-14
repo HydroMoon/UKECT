@@ -9,6 +9,7 @@ use App\Regs;
 use App\User;
 use App\Scourse;
 use App\Lcourse;
+use App\Note;
 use Auth;
 
 class UserController extends Controller
@@ -84,7 +85,17 @@ class UserController extends Controller
           $reg->user()->associate($user);
   
   
-          $reg->save();
+          try {
+            $reg->save();
+             }
+          catch (\Illuminate\Database\QueryException $e) {
+              $errorcode = $e->errorInfo[1];
+              if ($errorcode == 1062) {
+                Session::flash('error', __('home.error'));
+  
+                return redirect()->back();
+              }
+          }
   
           Session::flash('success', __('trans.short_user_reg'));
   
@@ -119,10 +130,49 @@ class UserController extends Controller
           $reg->user()->associate($user);
   
   
-          $reg->save();
+          try {
+            $reg->save();
+             }
+          catch (\Illuminate\Database\QueryException $e) {
+              $errorcode = $e->errorInfo[1];
+              if ($errorcode == 1062) {
+                Session::flash('error', __('home.error'));
+  
+                return redirect()->back();
+              }
+          }
   
           Session::flash('success', __('trans.long_user_reg'));
   
           return redirect()->route('user.dash');
+    }
+
+    public function note($cid)
+    {
+        $note = new Note;
+        $note = Note::where('lcourse_id', $cid)->where('user_id', Auth::user()->id)->get();
+        
+        return view('user.note')->with(['notes' => $note]);
+    }
+
+    public function Cert($id)
+    {
+        $cert = Reg::find($id);
+
+        return view('user.cert')->withCert($cert);
+    }
+
+    public function Certl($id)
+    {
+        $cert = Regs::find($id);
+
+        return view('user.certl')->withCert($cert);
+    }
+
+    public function getSubject($id)
+    {
+        $subject = Lcourse::find($id);
+
+        return view('user.subject')->withSubject($subject);
     }
 }

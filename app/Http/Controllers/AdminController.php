@@ -10,7 +10,10 @@ use App\Teacher;
 use App\Message;
 use App\Scourse;
 use App\Lcourse;
+use App\Note;
 use Session;
+use Purifier;
+use Image as IM;
 
 class AdminController extends Controller
 {
@@ -40,8 +43,18 @@ class AdminController extends Controller
 
         $users = User::all();
 
-
         return view('dashboard.users')->with(['data' => $users]);
+    }
+
+    public function delUser($id)
+    {
+        $user = User::find($id);
+
+        $user->delete();
+
+        Session::flash('success', __('trans.delUser'));
+
+        return redirect()->back();
     }
 
     public function getShortUser($id)
@@ -99,6 +112,16 @@ class AdminController extends Controller
           Session::flash('success', __('trans.add_teacher'));
   
           return redirect()->route('admin.teacher');
+    }
+
+    public function deleteTeacher($id)
+    {
+        $teacher = Teacher::find($id);
+        $teacher->delete();
+
+        Session::flash('success', __('trans.delTeacher'));
+
+        return redirect()->back();
     }
 
     public function updateReg(Request $request, $id)
@@ -192,7 +215,17 @@ class AdminController extends Controller
           $reg->user()->associate($user);
   
   
-          $reg->save();
+          try {
+            $reg->save();
+             }
+          catch (\Illuminate\Database\QueryException $e) {
+              $errorcode = $e->errorInfo[1];
+              if ($errorcode == 1062) {
+                Session::flash('error', __('home.error'));
+  
+                return redirect()->back();
+              }
+          }
   
           Session::flash('success', __('trans.short_user_reg'));
   
@@ -222,15 +255,123 @@ class AdminController extends Controller
           $reg->nationality = $request->nationality;
           $reg->phone = $request->phone;
           $reg->email = $request->email;
-          
+
           $reg->lcourse()->associate($request->lcourse_id);
           $reg->user()->associate($user);
   
+          try {
+            $reg->save();
+             }
+          catch (\Illuminate\Database\QueryException $e) {
+              $errorcode = $e->errorInfo[1];
+              if ($errorcode == 1062) {
+                Session::flash('error', __('home.error'));
   
-          $reg->save();
+                return redirect()->back();
+              }
+          }
   
           Session::flash('success', __('trans.long_user_reg'));
   
           return redirect()->back();
+    }
+
+    public function addNote($id, $cid)
+    {
+        $user = User::find($id);
+        $lcourse = Lcourse::find($cid);
+
+        return view('dashboard.add-note')->with(['user' => $user, 'lcourse' => $lcourse]);
+    }
+
+    public function storeNote(Request $request)
+    {
+        $user = User::find($request->uid);
+        $lcourse = Lcourse::find($request->cid);
+
+        $note = new Note;
+
+        $note->note = $request->note;
+        $note->user()->associate($user);
+        $note->lcourse()->associate($lcourse->id);
+
+        $note->save();
+
+        Session::flash('success', __('trans.add_note'));
+
+        return redirect()->back();
+    }
+
+    public function addCerts(Request $request)
+    {
+        
+        $this->validate($request, array(
+            'completed' => 'numeric',
+            'cert' => 'image'
+        ));
+
+        $cert = Reg::find($request->user);
+
+        if ($request->hasFile('cert')) {
+            $image = $request->file('cert');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('cert/' . $filename);
+            IM::make($image)->encode($image->getClientOriginalExtension(), 75)->save($location);
+            $cert->cert = $filename;
+          }
+        
+          $cert->completed = $request->comp;
+
+        $cert->save();
+        
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
+    }
+
+    public function addCertl(Request $request)
+    {
+        
+        $this->validate($request, array(
+            'completed' => 'numeric',
+            'cert' => 'image'
+        ));
+
+        $cert = Regs::find($request->user);
+
+        if ($request->hasFile('cert')) {
+            $image = $request->file('cert');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('cert/' . $filename);
+            IM::make($image)->encode($image->getClientOriginalExtension(), 75)->save($location);
+            $cert->cert = $filename;
+          }
+          $cert->completed = $request->comp;
+
+        $cert->save();
+        
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
+    }
+
+    public function getSubject($id)
+    {
+        $subject = Lcourse::find($id);
+
+        return view('dashboard.subject')->withSubject($subject);
+    }
+
+    public function addSubject(Request $request, $id)
+    {
+        $subject = Lcourse::find($id);
+
+        $subject->subject = Purifier::clean($request->subject);
+
+        $subject->save();
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->route('admin.courses');
     }
 }

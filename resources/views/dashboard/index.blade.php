@@ -4,45 +4,45 @@
 @endsection
 @section('content')
   <div class="card mt-3 mb-3">
-    <div class="card-header">لوحة التحكم الرئيسية</div>
+    <div class="card-header">{{ __('words.cpan') }}</div>
     <div class="card-body">
-      <div class="card-title">الكورسات</div>
+      <div class="card-title">{{ __('words.cour') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('admin.courses') }}">عرض الكورسات</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('admin.courses') }}">{{ __('words.vcour') }}</a>
         </div>
       </ul>
-      <div class="card-title">المدرسين</div>
+      <div class="card-title">{{ __('words.teach') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('admin.teacher') }}">عرض المدرسين</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('admin.teacher') }}">{{ __('words.vteach') }}</a>
         </div>
       </ul>
-      <div class="card-title">المسجلين</div>
+      <div class="card-title">{{ __('words.users') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('users') }}">عرض المسجلين</a>
-          <a class="btn btn-default" href="{{ route('users.add') }}">تسجيل جديد</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('users') }}">{{ __('words.vuser') }}</a>
+          <a class="btn btn-default" href="{{ route('users.add') }}">{{ __('words.auser') }}</a>
         </div>
       </ul>
-      <div class="card-title">المدونة</div>
+      <div class="card-title">{{ __('words.blog') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('posts.index') }}">المنشورات</a>
-          <a class="btn btn-default" href="{{ route('posts.create') }}">إضافة منشور</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('posts.index') }}">{{ __('words.posts') }}</a>
+          <a class="btn btn-default" href="{{ route('posts.create') }}">{{ __('words.apost') }}</a>
         </div>
       </ul>
-      <div class="card-title">الصور</div>
+      <div class="card-title">{{ __('words.pics') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('admin.image') }}">صور الغلاف</a>
-          <a class="btn btn-default" href="{{ route('admin.media') }}">صور الوسائط</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('admin.image') }}">{{ __('words.coveri') }}</a>
+          <a class="btn btn-default" href="{{ route('admin.media') }}">{{ __('words.mediai') }}</a>
         </div>
       </ul>
-      <div class="card-title">الرسائل</div>
+      <div class="card-title">{{ __('words.messages') }}</div>
       <ul>
-        <div class="form-control">
-          <a class="btn btn-default" href="{{ route('admin.message') }}">عرض الرسائل</a>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('admin.message') }}">{{ __('words.vmess') }}</a>
         </div>
       </ul>
     </div>

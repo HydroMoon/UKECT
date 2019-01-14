@@ -81,11 +81,9 @@ class CourseController extends Controller
             'cname' => 'required|string|max:255',
             'ctype' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'teacher' => 'required|string',
             'certificate' => 'required|string',
-            'start' => 'required|date_format:Y-m-d',
-            'finish' => 'required|date_format:Y-m-d',
             'info' => 'required',
+            'duration' => 'required'
           ));
 
         $longc = new Lcourse;
@@ -93,28 +91,15 @@ class CourseController extends Controller
         $longc->cname = $request->cname;
         $longc->ctype = $request->ctype;
         $longc->price = $request->price;
-        $longc->teacher = $request->teacher;
         $longc->certificate = $request->certificate;
         $longc->info = $request->info;
-        $longc->start = $request->start;
-        $longc->finish = $request->finish;
+        $longc->duration = $request->duration;
 
         $longc->save();
 
         Session::flash('success', __('trans.longc_success'));
 
         return redirect()->route('admin.courses');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -171,7 +156,6 @@ class CourseController extends Controller
         $shortc->price = $request->price;
         $shortc->teacher = $request->teacher;
         $shortc->certificate = $request->certificate;
-        $shortc->duration = $request->duration;
         $shortc->info = $request->info;
         $shortc->start = $request->start;
         $shortc->finish = $request->finish;
@@ -192,22 +176,17 @@ class CourseController extends Controller
             'cname' => 'required|string|max:255',
             'ctype' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'teacher' => 'required|string',
             'certificate' => 'required|string',
-            'start' => 'required|date_format:Y-m-d',
-            'finish' => 'required|date_format:Y-m-d',
             'info' => 'required',
+            'duration' => 'required',
           ));
 
         $longc->cname = $request->cname;
         $longc->ctype = $request->ctype;
         $longc->price = $request->price;
-        $longc->teacher = $request->teacher;
         $longc->certificate = $request->certificate;
-        $longc->duration = $request->duration;
         $longc->info = $request->info;
-        $longc->start = $request->start;
-        $longc->finish = $request->finish;
+        $longc->duration = $request->duration;
 
         $longc->save();
 

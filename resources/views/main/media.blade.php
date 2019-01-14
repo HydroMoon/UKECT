@@ -1,12 +1,12 @@
 @extends('app')
 @section('title')
-الوسائط
+{{ __('courses.media') }}
 @endsection
 
 @section('content')
 <div class="row justify-content-center" dir="ltr">
     <div class="col-md-8">
-        <h2 class="text-center m-2">الوسائط</h2>
+        <h2 class="text-center m-2">{{ __('courses.media') }}</h2>
         <div class="row">
             @foreach ($imgs as $item)
             <a href="{{ asset('gallery/' . $item->image) }}" data-toggle="lightbox" data-gallery="example-gallery"

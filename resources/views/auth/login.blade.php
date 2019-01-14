@@ -1,26 +1,26 @@
 @extends('app')
 @section('title')
-تسجيل الدخول
+{{ __('logreg.logtitle') }}
 @endsection
 @section('content')
     <div class="row">
         <div class="col-md-5 m-4 mx-auto">
             <div class="card card-default">
-                <div class="card-header text-center">تسجيل الدخول</div>
+                <div class="card-header text-center">{{ __('logreg.logtitle') }}</div>
 
                 <div class="card-body">
                     <form id="testt" class="form-horizontal" method="POST" action="{{ route('login') }}" data-parsley-validate>
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="control-label">البريد الإلكتروني</label>
+                            <label for="email" class="control-label">{{ __('words.uemail') }}</label>
 
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="control-label">كلمة السر</label>
+                            <label for="password" class="control-label">{{ __('logreg.pass') }}</label>
 
 
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -31,7 +31,7 @@
                             <div class="">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> تذكرني
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('logreg.remember') }}
                                     </label>
                                 </div>
                             </div>
@@ -40,11 +40,11 @@
                         <div class="form-group">
                             <div>
                                 <button type="submit" class="btn btn-default">
-                                    تسجيل الدخول
+                                    {{ __('logreg.login') }}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    هل نسيت كلمة السر؟
+                                    {{ __('logreg.forget') }}
                                 </a>
 
                                 <a href="{{ route('admin.login') }}">

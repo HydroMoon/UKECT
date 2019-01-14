@@ -18,20 +18,20 @@
     <form id="editpost" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data" method="POST">
       {{ method_field('PUT') }}
       {{ csrf_field() }}
-      <div class="form-group">
-        <label>العنوان</label>
+      <div class="form-group mt-1">
+        <label>{{ __('courses.ptitle') }}</label>
         <input type="text" class="form-control" name="title" value="{{ $post->title }}">
       </div>
       <div class="form-group">
-        <label>الرابط</label>
+        <label>{{ __('courses.link') }}</label>
         <input type="text" class="form-control" name="slug" value="{{ $post->slug }}">
       </div>
       <div class="form-group">
-        <label>صورة الغلاف:</label>
-        <input type="file" name="front_image" class="form-control">
+        <label>{{ __('courses.cov_i') }}:</label>
+        <input class="form-control" type="file" name="front_image">
       </div>
       <div class="form-group">
-        <label>النص</label>
+        <label>{{ __('courses.text') }}</label>
         <textarea name="body" rows="8" cols="80">{!! $post->body !!}</textarea>
       </div>
     </form>
@@ -39,25 +39,25 @@
 
   <div class="col-md-4">
     <div class="card my-4">
-      <h5 class="card-header">المنشور</h5>
+      <h5 class="card-header">{{ $post->title }}</h5>
       <div class="card-body">
         <dl class="dl-horizontal mb-2">
-          <dt class="card-subtitle">تاريخ الانشاء:</dt>
+          <dt class="card-subtitle">{{ __('words.date_start') }}:</dt>
           <dd class="text-muted">{{ date('M j, Y h:ia', strtotime($post->created_at)) }}</dd>
         </dl>
 
         <dl class="dl-horizontal mb-2">
-          <dt class="card-subtitle">تاريخ اخر تعديل:</dt>
+          <dt class="card-subtitle">{{ __('words.date_edit') }}:</dt>
           <dd class="text-muted">{{ date('M j, Y h:ia', strtotime($post->updated_at)) }}</dd>
         </dl>
         <div class="row">
           <a class="btn btn-success col m-1" href="{{ route('posts.update', $post->id) }}" onclick="event.preventDefault();
                     document.getElementById('editpost').submit();">
-            حفظ
+            {{ __('words.c_save') }}
           </a>
         </div>
         <div class="row">
-          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">الرجوع للمنشورات</a>
+          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">{{ __('courses.postback') }}</a>
         </div>
       </div>
     </div>

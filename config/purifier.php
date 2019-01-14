@@ -24,7 +24,7 @@ return [
     'settings'      => [
         'default' => [
             'HTML.Doctype'             => 'HTML 4.01 Transitional',
-            'HTML.Allowed'             => 'div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],h1,h2,h3,h4,h5,h6',
+            'HTML.Allowed'             => 'div,b,strong,i,em,u,a[href|title|target|data-mce-href|data-mce-selected],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],h1,h2,h3,h4,h5,h6',
             'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
             'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty'   => true,
@@ -96,6 +96,8 @@ return [
         ],
         'custom_attributes' => [
             ['a', 'target', 'Enum#_blank,_self,_target,_top'],
+            ['a', 'data-mce-href', 'URI'],
+            ['a', 'data-mce-selected', 'URI '],
         ],
         'custom_elements' => [
             ['u', 'Inline', 'Inline', 'Common'],

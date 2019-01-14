@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark peach-gradient">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="{{ route('main') }}">{{ Request::is('courses') ? "مركز يوكيكت للتدريب" : "المؤسسة البريطانية" }}</a>
+  <a class="navbar-brand" href="{{ route('main') }}">{{ Request::is('short-courses') ? "مركز يوكيكت للتدريب" : "المؤسسة البريطانية" }}</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,8 +20,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الكورسات</a>
         <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">قصيرة الامد</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">طويلة الامد</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">الكورسات التدريبية</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">البرامج التخصصية</a>
         </div>
       </li>
       <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
@@ -36,6 +36,9 @@
       <li class="nav-item {{ Request::is('contact-us') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('contact') }}">تواصل معنا</a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('lang', 'en') }}">English</a>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
@@ -45,7 +48,7 @@
           <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.courses') }}">الكورسات</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.teacher') }}">المدرسين</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.teacher') }}">المشرفين</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('users') }}">المسجلين</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.image') }}">صور الغلاف</a>

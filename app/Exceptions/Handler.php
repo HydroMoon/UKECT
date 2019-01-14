@@ -5,6 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
@@ -48,7 +51,14 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
+    {   
+
+        if($exception instanceof NotFoundHttpException) {
+            return abort(404, 'Page you are looking for is not found in our server.');
+        } elseif ($exception instanceof ErrorException) {
+            return response()->view('errors.404', [], 404);
+        }
+
         return parent::render($request, $exception);
     }
 

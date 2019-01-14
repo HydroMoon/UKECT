@@ -5,20 +5,20 @@
 @section('content')
 <div class="row">
   <div class="col-lg-8 mt-3">
-        <h3 class="text-center">كورس قصير الامد</h3>
+        <h3 class="text-center">{{ __('words.shortc') }}</h3>
     <form id="editpost" action="{{ route('admin.scourse.update', $short->id) }}" method="POST">
       {{ method_field('PUT') }}
       {{ csrf_field() }}
       <div class="form-group">
-            <label for="cname">اسم الكورس</label>
+            <label for="cname">{{ __('words.course_name') }}</label>
             <input class="form-control" type="text" name="cname" id="cname" value="{{ $short->cname }}">
         </div>
         <div class="form-group">
-            <label for="price">سعر الكورس</label>
+            <label for="price">{{ __('words.course_price') }}</label>
             <input class="form-control" type="text" name="price" id="price" value="{{ $short->price }}">
         </div>
         <div class="form-group">
-            <label for="teacher">مدرس الكورس</label>
+            <label for="teacher">{{ __('words.course_teach') }}</label>
             <select class="form-control" name="teacher" id="teacher">
                 @foreach ($teacher as $item)
                 @if ("{{ $short->teacher }}" == "{{ $item->name }}")
@@ -30,29 +30,28 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="certificate">الشهادة</label>
+            <label for="certificate">{{ __('words.course_cert') }}</label>
             <input class="form-control" type="text" name="certificate" id="certificate" value="{{ $short->certificate }}">
         </div>
 
         <div class="form-group date" data-date="2000-02-02" data-date-format="yyyy-mm-dd">
-            <label for="duration">مدة الكورس</label>
+            <label for="duration">{{ __('words.course_dura') }}</label>
 
             <div class="row">
                     <div class="col-sm">
-                        <label for="dration">من</label>
+                        <label for="dration">{{ __('words.from') }}</label>
                         <input id="duration" class="form-control datepicker" name="start" value="{{ $short->start }}">
                     </div>
                     <div class="col-sm">
-                            <label for="dration">الى</label>
+                            <label for="dration">{{ __('words.to') }}</label>
                         <input id="duration" class="form-control datepicker" name="finish" value="{{ $short->finish }}">
                     </div>
                 </div>
         </div>
         <div class="form-group">
-            <label for="" info>معلومات عن الكورس</label>
+            <label for="info">{{ __('words.c_info') }}</label>
             <textarea class="form-control" name="info" id="info" cols="30" rows="3">{{ $short->info }}</textarea>
         </div>
-        <input type="hidden" name="duration" value="lol">
     </form>
   </div>
 
@@ -61,22 +60,22 @@
       <h5 class="card-header">{{ $short->cname }}</h5>
       <div class="card-body">
         <dl class="dl-horizontal mb-2">
-          <dt class="card-subtitle">تاريخ الانشاء:</dt>
+          <dt class="card-subtitle">{{ __('words.date_start') }}:</dt>
           <dd class="text-muted">{{ date('M j, Y h:ia', strtotime($short->created_at)) }}</dd>
         </dl>
 
         <dl class="dl-horizontal mb-2">
-          <dt class="card-subtitle">تاريخ اخر تعديل:</dt>
+          <dt class="card-subtitle">{{ __('words.date_edit') }}:</dt>
           <dd class="text-muted">{{ date('M j, Y h:ia', strtotime($short->updated_at)) }}</dd>
         </dl>
         <div class="row">
           <a class="btn btn-success col m-1" href="{{ route('admin.scourse.update', $short->id) }}" onclick="event.preventDefault();
                     document.getElementById('editpost').submit();">
-            حفظ
+            {{ __('words.c_save') }}
           </a>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-danger col m-1" data-toggle="modal" data-target="#AppModel">حذف الكورس</button>
+          <button type="button" class="btn btn-danger col m-1" data-toggle="modal" data-target="#AppModel">{{ __('words.c_delete') }}</button>
         </div>
       </div>
     </div>
@@ -92,18 +91,18 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="AppModelLabel">تأكيد</h5>
+              <h5 class="modal-title" id="AppModelLabel">{{ __('words.confrim') }}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              هل انت متاكد؟ سوف يتم حذف الكورس من جميع المسجلين!
+              {{ __('words.confdiag') }}
           </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('words.c_close') }}</button>
                 <button type="button" class="btn btn-success" onclick="event.preventDefault();
-                document.getElementById('delete-course').submit();">نعم</button>
+                document.getElementById('delete-course').submit();">{{ __('words.yes') }}</button>
               </div>
           </div>
         </div>

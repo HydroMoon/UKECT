@@ -1,27 +1,27 @@
 @extends('app')
 @section('title')
-التسجيل في الكورسات الطويلة
+{{ __('courses.titlel') }}
 @endsection
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 m-4 mx-auto">
             <div class="card card-default">
-                <div class="card-header">تسجيل الكورسات الطويلة</div>
+                <div class="card-header">{{ __('courses.titlel') }}</div>
 
                 <div class="card-body">
                     <form id="reg-form" class="form-horizontal" method="POST" action="{{ route('user.long.submit') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="name">الأسم رباعي</label>
+                            <label for="name">{{ __('courses.name') }}</label>
 
 
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                         </div>
 
                         <div class="form-group date" data-date="2000-02-02" data-date-format="yyyy-mm-dd">
-                                <label for="dob">تاريخ الميلاد</label>
+                                <label for="dob">{{ __('courses.dob') }}</label>
     
     
                                     <input id="dob" class="form-control datepicker" name="dob" required>
@@ -29,21 +29,21 @@
     
                             </div>
                             <div class="form-group">
-                                    <label for="inputState">الجنس</label>
+                                    <label for="inputState">{{ __('courses.gender') }}</label>
                                     <select name="sex" id="inputState" class="form-control">
-                                      <option value="ذكر" selected>ذكر</option>
-                                      <option value="انثى">انثى</option>
+                                      <option value="ذكر" selected>{{ __('courses.male') }}</option>
+                                      <option value="انثى">{{ __('courses.female') }}</option>
                                     </select>
                                   </div>
 
                                   <div class="form-group">
-                                      <label for="nationality">الجنسية</label>
+                                      <label for="nationality">{{ __('courses.nation') }}</label>
 
                                       <input class="form-control" type="text" name="nationality" required>
                                   </div>
 
                         <div class="form-group">
-                            <label for="phone">الهاتف</label>
+                            <label for="phone">{{ __('courses.phone') }}</label>
 
 
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ $user->phone }}" required>
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
+                                <label for="email">{{ __('words.uemail') }}</label>
     
     
                                     <input id="email" type="text" class="form-control" name="email" value="{{ $user->email }}" required>
@@ -63,9 +63,9 @@
 
 
                               <div class="form-group">
-                                    <label for="inputState">البرامج المتاحة</label>
+                                    <label for="inputState">{{ __('courses.longcourses') }}</label>
                                     <select id="inputState" class="form-control" name="lcourse_id">
-                                      <option selected>اختيار البرنامج</option>
+                                      <option selected>{{ __('courses.chosel') }}</option>
                                       @foreach ($longc as $item)
                                           <option value="{{ $item->id }}">{{ $item->ctype }}: {{ $item->cname }}</option>
                                       @endforeach
@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AppModel">
-                                    تسجيل
+                                        {{ __('courses.register') }}
                                 </button>
                         </div>
                     </form>
@@ -89,18 +89,18 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="AppModelLabel">تأكيد</h5>
+              <h5 class="modal-title" id="AppModelLabel">{{ __('words.confrim') }}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              هل انت متاكد من التسجيل
+                    {{ __('courses.confdiag') }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('words.c_close') }}</button>
                 <button type="button" class="btn btn-success" onclick="event.preventDefault();
-                document.getElementById('reg-form').submit();">نعم</button>
+                document.getElementById('reg-form').submit();">{{ __('words.yes') }}</button>
               </div>
           </div>
         </div>

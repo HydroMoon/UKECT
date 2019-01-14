@@ -9,13 +9,22 @@
     <h1 class="mt-4">{{ $post->title }}</h1>
 
     <p class="lead">
-      تم النشر بواسطة
+      {{ __('courses.postby') }}
       {{ $post->uname }}
     </p>
     <hr>
-    <p><div class="" style="direction:ltr;">
-        ({{ date_format($post->created_at, 'd/m/Y g:i A') }}) تم النشر في
-      </div></p>
+    <p>
+      @if (app()->getLocale() == 'en')
+        <div class="" style="direction:ltr;">
+          {{ __('courses.postdate') }}
+          ({{ date_format($post->created_at, 'd/m/Y g:i A') }})
+        </div>
+        @else
+        <div class="" style="direction:ltr;">
+          ({{ date_format($post->created_at, 'd/m/Y g:i A') }}) {{ __('courses.postdate') }}
+        </div>
+        @endif
+    </p>
 
     <hr>
 
@@ -31,27 +40,27 @@
   </div>
   <div class="col-md-4">
     <div class="card my-4">
-      <h5 class="card-header">المنشور</h5>
+      <h5 class="card-header">{{ $post->title }}</h5>
       <div class="card-body">
         <dl class="dl-horizontal mb-2">
-  					<dt class="card-subtitle">رابط المنشور:</dt>
+  					<dt class="card-subtitle">{{ __('courses.postlink') }}:</dt>
   					<a href="{{ route('blog.single', $post->slug) }}" class="link">{{ route('blog.single', $post->slug) }}</a>
   				</dl>
 
         <dl class="dl-horizontal mb-2">
-  					<dt class="card-subtitle">تاريخ الانشاء:</dt>
+  					<dt class="card-subtitle">{{ __('words.date_start') }}:</dt>
   					<dd class="text-muted">{{ date('M j, Y h:ia', strtotime($post->created_at)) }}</dd>
   				</dl>
 
   				<dl class="dl-horizontal mb-2">
-  					<dt class="card-subtitle">تاريخ اخر تعديل:</dt>
+  					<dt class="card-subtitle">{{ __('words.date_edit') }}:</dt>
   					<dd class="text-muted">{{ date('M j, Y h:ia', strtotime($post->updated_at)) }}</dd>
   				</dl>
         <div class="row">
-          <a class="btn btn-primary col m-1" href="{{ route('posts.edit', $post->id) }}">تعديل</a>
+          <a class="btn btn-primary col m-1" href="{{ route('posts.edit', $post->id) }}">{{ __('words.c_edit') }}</a>
           <a class="btn btn-danger col m-1" href="{{ route('posts.destroy', $post->id) }}" onclick="event.preventDefault();
                     document.getElementById('delete-post').submit();">
-            حذف
+            {{ __('courses.del') }}
           </a>
 
           <form id="delete-post" action="{{ route('posts.destroy', $post->id) }}" method="post" style="display: none;">
@@ -60,7 +69,7 @@
           </form>
         </div>
         <div class="row">
-          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">الرجوع للمنشورات</a>
+          <a class="btn btn-secondary col m-1" href="{{ route('posts.index') }}">{{ __('courses.postback') }}</a>
         </div>
       </div>
     </div>

@@ -95,4 +95,15 @@ class BlogController extends Controller
       
       return view('main.media')->with(['imgs' => $image]);
     }
+
+    public function all()
+    {
+      $short = new Scourse;
+      $short = Scourse::all();
+
+      $long = new Lcourse;
+      $long = Lcourse::all();
+
+      return view('courses.all')->with(['short' => $short, 'long' => $long]);
+    }
 }

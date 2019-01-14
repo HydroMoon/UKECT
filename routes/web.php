@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +15,8 @@
 */
 Auth::routes();
 
+Route::get('lang/{lang}', ['as' => 'lang', 'uses' => 'LanguageController@switchLang']);
+
 
 Route::get('blog', 'BlogController@getIndex')->name('blog');
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
@@ -23,6 +28,8 @@ Route::get('short-courses', 'BlogController@getShort')->name('short');
 Route::get('long-courses', 'BlogController@getLong')->name('long');
 
 Route::get('media', 'BlogController@getMedia')->name('media');
+
+Route::get('all', 'BlogController@all')->name('all_courses');
 
 Route::post('contact-us', 'BlogController@saveMessage')->name('contact.save');
 
@@ -42,6 +49,13 @@ Route::prefix('user')->group( function () {
 
     Route::get('/long-reg', 'UserController@getLong')->name('user.long');
     Route::post('/long-reg', 'UserController@storeLong')->name('user.long.submit');
+
+    Route::get('/note/{cid}', 'UserController@note')->name('user.notes');
+
+    Route::get('/cert-course/{id}', 'UserController@Cert')->name('show_cert');
+    Route::get('/cert-program/{id}', 'UserController@Certl')->name('show_certl');
+
+    Route::get('/program/{id}', 'UserController@getSubject')->name('user.subject');
 });
 
     
@@ -86,7 +100,12 @@ Route::prefix('admin')->group( function () {
     Route::put('/users-short/{id}', 'AdminController@updateReg')->name('users.single.supdate');
     Route::put('/users-long/{id}', 'AdminController@updateRegs')->name('users.single.lupdate');
 
+    Route::post('/users-certs', 'AdminController@addCerts')->name('users.single.addcerts');
+    Route::post('/users-certl', 'AdminController@addCertl')->name('users.single.addcertl');
+
     Route::get('/add-user', 'AdminController@addUser')->name('users.add');
+
+    Route::delete('/del-user/{id}', 'AdminController@delUser')->name('users.del');
 
     Route::get('/add-long/{id}', 'AdminController@getLong')->name('users.inside.long');
     Route::get('/add-short/{id}', 'AdminController@getShort')->name('users.inside.short');
@@ -96,4 +115,22 @@ Route::prefix('admin')->group( function () {
 
     Route::get('/teachers', 'AdminController@getTeacher')->name('admin.teacher');
     Route::post('/teachers', 'AdminController@storeTeacher')->name('admin.teacher.add');
+    Route::delete('/teachers/{id}', 'AdminController@deleteTeacher')->name('admin.teacher.delete');
+
+    Route::get('/add-note/{id}/{cid}', 'AdminController@addNote')->name('admin.note');
+    Route::post('/add-note', 'AdminController@storeNote')->name('admin.note.store');
+
+    Route::get('/program/{id}', 'AdminController@getSubject')->name('admin.subject.get');
+    Route::put('/program/{id}', 'AdminController@addSubject')->name('admin.subject.add');
+
+    Route::post('/users/search', function () {
+        $q = Input::get ( 'q' );
+        $user = User::where('name', 'LIKE', '%' . $q . '%')->orWhere('phone', 'LIKE', '%' . $q . '%')->get();
+        if(count($user) > 0) {
+            return view('dashboard.users')->with(['data' => $user])->withQuery($q);
+        } else {
+            Session::flash('error', __('trans.search'));
+            return redirect()->route('users');
+        }
+    })->name('search.users');
 });
