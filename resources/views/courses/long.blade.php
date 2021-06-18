@@ -4,122 +4,55 @@
 @endsection
 @section('jum')
 
-<div class="jumbotron jumbotron-fluid peach-gradient">
+<div class="jumbotron jumbotron-fluid purple-gradient text-white" style="margin-bottom: 0 !important;">
     <div class="container">
-        <h1 class="display-4">{{ __('ukest.ukest') }}</h1>
-        <p class="lead">{{ __('ukest.ukestabout') }}</p>
+        <h2>البرامج المتاحة في الكلية</h2>
+        <p class="lead">تحتوي الكلية على العديد من البرامج المتاحة للطلاب للاختيار منها.</p>
     </div>
 </div>
-@endsection
-
-@section('content')
-
-<div class="row">
-    <div class="col-sm mb-4">
-        <section class="customer-logos slider" dir="ltr">
-                @foreach ($long as $item)
-                <div class="slide">
-                    <div class="card card-default slide-card">
-                      <div class="card-body">
-                        <h5 class="text-center">{{ $item->cname }}</h5>
-                        <h6 class="text-center">{{ $item->ctype }}</h6>
-                        <div>
-                          <p>{{ $item->teacher }}</p>
-                          <hr>
-                          <p class="text-center">{{ $item->duration }}</p>
-                        </div>
-                        <a class="btn btn-secondary btn-block m-1" href="{{ route('user.long') }}">{{ __('ukect.reg') }}</a>
-                      </div>
-                    </div>
-                  </div>
-                @endforeach
-        </section>
-    </div>
-</div>
-
 @endsection
 
 @section('sec2')
 <section style="background: #f9f9f9; border: 1px solid #e6e6e6;">
+    <br>
     <div class="container">
         <div class="row">
-            <div class="col-sm m-2">
-                <br>
-                <h3 class="text-center">{{ __('ukest.approved') }}</h3>
-                <p class="text-center">
-                    {{ __('ukest.liver') }}
-                        <br>
-                        {{ __('ukest.metch') }}
-                    </p>
-                <hr>
-                <p>{{ __('ukest.text') }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm m-2">
-                <h3>{{ __('ukest.diploma') }}</h3>
+            <div class="col-sm m-2">    
+                <h3>برامج الدبلوم</h3>
                 <p>
-                    <ul>{{ __('ukest.p1') }}</ul>
-                    <ul>{{ __('ukest.p2') }}</ul>
-                    <ul>{{ __('ukest.p3') }}</ul>
-                    <ul>{{ __('ukest.p4') }}</ul>
-                    <ul>{{ __('ukest.p5') }}</ul>
-                    <ul>{{ __('ukest.p6') }}</ul>
-                    <ul>{{ __('ukest.p7') }}</ul>
-                    <ul>{{ __('ukest.p8') }}</ul>
+                    <ul>دبلوم الضيافة الجوية</ul>
+                    <ul>دبلوم تقانة المعلومات</ul>
                 </p>
             </div>
             <div class="col-sm m-2">
-                <h3>{{ __('ukest.bsch') }}</h3>
+                <h3>برامج البكالاريوس</h3>
                 <p>
-                    <ul>{{ __('ukest.p1') }}</ul>
-                    <ul>{{ __('ukest.p2') }}</ul>
-                    <ul>{{ __('ukest.p3') }}</ul>
-                    <ul>{{ __('ukest.p4') }}</ul>
-                    <ul>{{ __('ukest.p5') }}</ul>
-                    <ul>{{ __('ukest.p6') }}</ul>
-                    <ul>{{ __('ukest.p7') }}</ul>
-                    <ul>{{ __('ukest.p8') }}</ul>
+                    <ul>بكالوريوس الجمارك والتجارة الدولية</ul>
+                    <ul>بكالوريوس الاقتصاد والعلوم المالية</ul>
+                    <ul>بكالوريويس العمليات الجوية</ul>
+                    <ul>بكالوريوس العلوم الإدارية (محاسبة وإدارة أعمال)</ul>
+                    <ul>بكالوريوس تقانة المعلومات</ul>
                 </p>
             </div>
         </div>
+        <hr>
+        <h3 class="text-center">برامج الدراسات المستمرة</h3>
+        <br>
         <div class="row">
-            <div class="col-sm m-2">
-                <h3>{{ __('ukest.other') }}</h3>
-                <p>{{ __('ukest.othertext') }}</p>
-                <h3 class="text-center">{{ __('ukest.giver') }}</h3>
-                <p class="text-center">
-                    {{ __('ukest.metch') }}
+            <hr>
+            <div class="col-sm m-2">   
+                <p>
+                    <ul>الجمارك</ul>
+                    <ul>تقانة المعلومات</ul>
+                    <ul>المحاسبة الإلكترونية</ul>
                 </p>
             </div>
-        </div>
-        <div class="row">
-                <div class="col-sm m-2">
-                    <h3>{{ __('ukest.certapprove') }}</h3>
-                    <p>{{ __('ukest.certtext') }}</p>
-                    <hr>
-                    <h3>{{ __('ukest.condition') }}</h3>
-                </div>
-        </div>
-        <div class="row">
-            <div class="col-sm m-2">
-                <h3>{{ __('ukest.dip') }}</h3>
-<p>{{ __('ukest.dipt') }}</p>         
-   </div>
-            <div class="col-sm m-2">
-                <h3>{{ __('ukest.bac') }}</h3>
-<p>{{ __('ukest.bact') }}</p>       
-     </div>
-        </div>
-        <div class="row">
-                <div class="col-sm m-2">
-                    <h3>{{ __('ukest.mas') }}</h3>
-                    <p>{{ __('ukest.mast') }}</p>
-                </div>
-                <div class="col-sm m-2">
-                    <h3>{{ __('ukest.doc') }}</h3>
-<p>{{ __('ukest.doct') }}</p>   
-             </div>
+            <div class="col-sm m-2">   
+                <p>
+                    <ul>وكالات السفر والسياحة</ul>
+                    <ul>التسويق والمبيعات</ul>
+                </p>
+            </div>
         </div>
     </div>
 </section>

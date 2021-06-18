@@ -10,6 +10,9 @@ use App\User;
 use App\Scourse;
 use App\Lcourse;
 use App\Note;
+use App\Material;
+use App\Specialty;
+use App\Course;
 use Auth;
 
 class UserController extends Controller
@@ -171,8 +174,19 @@ class UserController extends Controller
 
     public function getSubject($id)
     {
-        $subject = Lcourse::find($id);
+        $courses = Course::where('spec_id', $id)->get();
+        
+        $spec = Specialty::find($id);
 
-        return view('user.subject')->withSubject($subject);
+        return view('user.subject')->with(['courses' => $courses, 'spec' => $spec]);
+    }
+
+    // [ADD]LMS FUNCTIONS
+    public function getStudentCourse($c_id)
+    {
+        $course = Material::where('course_id', $c_id)->get();
+        $course_info = Course::find($c_id);
+
+        return view('user.course-material')->with(['material' => $course, 'course_info' => $course_info]);
     }
 }

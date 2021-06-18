@@ -1,8 +1,8 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark peach-gradient">
+<nav class="navbar navbar-expand-lg navbar-dark purple-gradient">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="{{ route('main') }}">{{ Request::is('short-courses') ? "مركز يوكيكت للتدريب" : "المؤسسة البريطانية" }}</a>
+  <a class="navbar-brand" href="{{ route('main') }}">كلية أمدرمان</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,22 +17,15 @@
       <li class="nav-item {{ Request::is('/') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('main') }}">الرئيسية</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الكورسات</a>
-        <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('short') }}">الكورسات التدريبية</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('long') }}">البرامج التخصصية</a>
-        </div>
+      <li class="nav-item {{ Request::is('long-courses') ? "active" : "" }}">
+        <a class="nav-link" href="{{ route('long') }}">البرامج</a>
       </li>
-      <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
+      {{-- <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('blog') }}">المدونة</a>
-      </li>
-      <li class="nav-item {{ Request::is('media') ? "active" : "" }}">
-          <a class="nav-link" href="{{ route('media') }}">الوسائط</a>
-        </li>
-      <li class="nav-item {{ Request::is('about') ? "active" : "" }}">
+      </li> --}}
+      {{-- <li class="nav-item {{ Request::is('about') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('about') }}">عن المؤسسة</a>
-      </li>
+      </li> --}}
       <li class="nav-item {{ Request::is('contact-us') ? "active" : "" }}">
         <a class="nav-link" href="{{ route('contact') }}">تواصل معنا</a>
       </li>
@@ -47,12 +40,15 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">لوحة التحكم</a>
           <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('dash') }}">الرئيسية</a>
+            @role('admin')
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.courses') }}">الكورسات</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.teacher') }}">المشرفين</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('users') }}">المسجلين</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('posts.index') }}">المدونة</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.image') }}">صور الغلاف</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.message') }}">الرسائل</a>
+            @endrole
+            @role('teacher')
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.courses.get') }}">الكورسات</a>
+            @endrole
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
               تسجيل الخروج
@@ -67,7 +63,7 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
         <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.dash') }}">لوحة المتابعة</a>
-          <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.courses') }}">التسجيلات</a>
+          <a class="dropdown-item text-center waves-effect waves-light" href="#">الامتحانات</a>
           <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
             تسجيل الخروج

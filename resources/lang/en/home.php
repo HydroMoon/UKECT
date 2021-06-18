@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'uk' => 'UK Establishment for Consulting and Training',
+  'uk' => 'Omdurman College for Aviation and Technology',
   'ukabout' => 'The giant institution that was established to contribute in the fields of education and training and is characterized by the provision of international programs on a high quality and local programs and local courses that contribute to the training of working groups and non-working',
   'ukect' => 'Training Courses',
   'ukest' => 'Programs',

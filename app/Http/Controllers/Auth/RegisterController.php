@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Session;
+use App\Specialty;
 
 class RegisterController extends Controller
 {
@@ -24,6 +25,13 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    public function showRegistrationForm()
+    {
+        $spec = Specialty::all();
+
+        return view('auth.register')->withSpecs($spec);
+    }
 
     /**
      * Where to redirect users after registration.
@@ -55,6 +63,9 @@ class RegisterController extends Controller
             'phone' => 'required|numeric|min:10|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'dob' => 'required',
+            'gender' => 'required',
+            'spec_id' => 'required|numeric',
         ]);
     }
 
@@ -70,7 +81,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'email' => $data['email'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
             'password' => bcrypt($data['password']),
+            'spec_id' => $data['spec_id'],
         ]);
     }
 

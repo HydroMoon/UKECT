@@ -23,11 +23,10 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 
 
 Route::get('/', 'BlogController@getMain')->name('main');
-Route::get('about', 'BlogController@getEmployee')->name('about');
+// Route::get('about', 'BlogController@getEmployee')->name('about');
 Route::get('short-courses', 'BlogController@getShort')->name('short');
 Route::get('long-courses', 'BlogController@getLong')->name('long');
 
-Route::get('media', 'BlogController@getMedia')->name('media');
 
 Route::get('all', 'BlogController@all')->name('all_courses');
 
@@ -36,6 +35,10 @@ Route::post('contact-us', 'BlogController@saveMessage')->name('contact.save');
 Route::get('contact-us', function () {
     return view('main.contact');
 })->name('contact');
+
+Route::get('course-material', function () {
+    return view('user.course-material');
+})->name('course-material');
 
 
 
@@ -56,6 +59,10 @@ Route::prefix('user')->group( function () {
     Route::get('/cert-program/{id}', 'UserController@Certl')->name('show_certl');
 
     Route::get('/program/{id}', 'UserController@getSubject')->name('user.subject');
+
+
+    Route::get('/courses/{id}', 'UserController@getSubject')->name('user.courses.show');
+    Route::get('/material/{c_id}', 'UserController@getStudentCourse')->name('user.materials');
 });
 
     
@@ -114,17 +121,26 @@ Route::prefix('admin')->group( function () {
     Route::post('/add-short', 'AdminController@storeShort')->name('users.inside.short.submit');
 
     Route::get('/teachers', 'AdminController@getTeacher')->name('admin.teacher');
-    Route::post('/teachers', 'AdminController@storeTeacher')->name('admin.teacher.add');
+    Route::post('/teachers', 'AdminController@createTeacher')->name('admin.teacher.add');
     Route::delete('/teachers/{id}', 'AdminController@deleteTeacher')->name('admin.teacher.delete');
 
     Route::get('/add-note/{id}/{cid}', 'AdminController@addNote')->name('admin.note');
     Route::post('/add-note', 'AdminController@storeNote')->name('admin.note.store');
 
     Route::get('/program/{id}', 'AdminController@getSubject')->name('admin.subject.get');
-    Route::put('/program/{id}', 'AdminController@addSubject')->name('admin.subject.add');
+    Route::post('/program/{id}', 'AdminController@addSubject')->name('admin.subject.add');
+
+
+    Route::get('/my-courses', 'AdminController@getMyCourses')->name('admin.courses.get');
+    Route::get('/add-lectures/{c_id}', 'AdminController@getLectures')->name('admin.lectures.get');
+    Route::post('/upload-lectures', 'AdminController@addMaterials')->name('admin.upload.lectures');
+    Route::delete('del-material/{id}', 'AdminController@delMaterial')->name('admin.material.delete');
+    
+    Route::post('/upload', 'FileUploadController@store')->name('admin.upload.file');
+
 
     Route::post('/users/search', function () {
-        $q = Input::get ( 'q' );
+        $q = Input::get('q');
         $user = User::where('name', 'LIKE', '%' . $q . '%')->orWhere('phone', 'LIKE', '%' . $q . '%')->get();
         if(count($user) > 0) {
             return view('dashboard.users')->with(['data' => $user])->withQuery($q);

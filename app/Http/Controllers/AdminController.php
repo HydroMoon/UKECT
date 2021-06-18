@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Admin;
+
+use jeremykenedy\LaravelRoles\Models\Role;
+
 use App\Reg;
 use App\Regs;
 use App\Teacher;
+use App\Course;
+use App\Material;
+use App\TemporaryMedia;
 use App\Message;
 use App\Scourse;
 use App\Lcourse;
 use App\Note;
+use App\Specialty;
+use Illuminate\Support\Facades\Storage;
 use Session;
 use Purifier;
 use Image as IM;
@@ -70,11 +79,10 @@ class AdminController extends Controller
 
     public function getLongUser($id)
     {
-        $long_reg = new Regs;
 
         $user = User::find($id);
 
-        $long_reg = Regs::where('user_id', $id)->get();
+        $long_reg = Specialty::where('id', $user->spec_id)->get();
 
         return view('dashboard.single-long')->with(['regs' => $long_reg, 'user' => $user]);
     }
@@ -82,9 +90,7 @@ class AdminController extends Controller
 
     public function getTeacher()
     {
-        $teach = new Teacher;
-
-        $teach = Teacher::all();
+        $teach = Admin::where('id', '!=', auth()->id()  )->get();
 
         return view('dashboard.teacher')->with(['teacher' => $teach]);
     }
@@ -116,7 +122,7 @@ class AdminController extends Controller
 
     public function deleteTeacher($id)
     {
-        $teacher = Teacher::find($id);
+        $teacher = Admin::find($id);
         $teacher->delete();
 
         Session::flash('success', __('trans.delTeacher'));
@@ -236,28 +242,20 @@ class AdminController extends Controller
     {
         //Validate
          $this->validate($request, array(
-            'name' => 'required|string|max:255',
-            'dob' => 'required|date_format:Y-m-d',
-            'nationality' => 'required|string',
-            'phone' => 'required|numeric|min:10',
-            'email' => 'required|string|email|max:255',
+            'spec_name' => 'required|string|max:255',
+            'spec_type' => 'required|string',
+            'duration' => 'required',
+            'info' => 'required',
           ));
 
           //save info into database
 
-          $user = User::find($request->userid);
-
-          $reg = new Regs;
+          $reg = new Specialty;
   
-          $reg->name = $request->name;
-          $reg->dob = $request->dob;
-          $reg->sex = $request->sex;
-          $reg->nationality = $request->nationality;
-          $reg->phone = $request->phone;
-          $reg->email = $request->email;
-
-          $reg->lcourse()->associate($request->lcourse_id);
-          $reg->user()->associate($user);
+          $reg->spec_name = $request->spec_name;
+          $reg->spec_type = $request->spec_type;
+          $reg->duration = $request->duration;
+          $reg->info = $request->info;
   
           try {
             $reg->save();
@@ -357,21 +355,141 @@ class AdminController extends Controller
 
     public function getSubject($id)
     {
-        $subject = Lcourse::find($id);
-
-        return view('dashboard.subject')->withSubject($subject);
+        $subject = Course::where('spec_id', $id)->get();
+        $teacher = Role::where('name', '=', 'Teacher')->first();
+        $spec = Specialty::find($id);
+        
+        return view('dashboard.subject')->with(['subject' => $subject, 'teacher' => $teacher, 'spec' => $spec]);
     }
 
     public function addSubject(Request $request, $id)
     {
-        $subject = Lcourse::find($id);
+        $this->validate($request, array(
+            'course_name' => 'required|string|max:255',
+            'semester' => 'required|numeric|min:1|max:10',
+            'teacher' => 'required|string', 
+        ));
 
-        $subject->subject = Purifier::clean($request->subject);
+        $teacher_name = Admin::find($request->teacher);
+        
+        $course = new Course;
 
-        $subject->save();
+        $course->course_name = $request->course_name;
+        $course->semester = $request->semester;
+        $course->teacher = $teacher_name->name;
+        
+        $course->spec()->associate($id);
+        $course->teacher()->associate($request->teacher);
+
+        $course->save();
 
         Session::flash('success', __('words.certsuc'));
 
-        return redirect()->route('admin.courses');
+        return redirect()->route('admin.subject.get', $id);
     }
+
+    public function createTeacher(Request $request)
+    {
+        $this->validate($request, array(
+            'name' => 'required|string|max:255',
+            'phone' => 'required|numeric|min:10|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ));
+
+        $role = Role::where('name', '=', 'Teacher')->first();//choose the default role upon user creation.
+
+        $newUser = Admin::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        $attRole = Admin::find($newUser->id);
+        
+        $attRole->attachRole($role);
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->route('admin.teacher');
+    }
+
+
+    public function getMyCourses()
+    {
+        $courses = Course::where('teacher_id', auth()->id())->get();
+        
+        return view('dashboard.my-courses')->with(['courses' => $courses]);
+    }
+
+    public function getLectures($c_id)
+    {
+        $material = Material::where('course_id', $c_id)->get();
+        $course_name = Course::find($c_id)->course_name;
+
+        return view('dashboard.add-lectures')->with(['material' => $material, 'course_id' => $c_id, 'cname' => $course_name]);
+    }
+
+
+    public function addMaterials(Request $request)
+    {
+        $this->validate($request, array(
+            'name' => 'required|string|max:255',
+        ));
+
+        $tmpFile = TemporaryMedia::where('path', $request->file)->first();
+
+        if ($tmpFile) {
+            $size = Storage::size('tmp/' . $request->file . '/' . $tmpFile->name);
+
+            $fileType = pathinfo(storage_path() . 'tmp/' . $request->file . '/' . $tmpFile->name);
+
+            $material = new Material;
+
+            $material->name = $request->name;
+            $material->file_name = $request->file . '/' . $tmpFile->name;
+            $material->type = $fileType['extension'];
+            $material->size = $this->formatBytes($size);
+
+            $material->course()->associate($request->course_id);
+
+            $material->save();
+
+            $material->addMedia('files/tmp/' . $request->file . '/' . $tmpFile->name)->toMediaCollection();
+
+            $tmpFile->delete();
+
+            Session::flash('success', __('words.certsuc'));
+        }
+        
+        
+
+        return redirect()->route('admin.lectures.get', $request->course_id);
+    }
+
+    public function delMaterial($id)
+    {
+        $material = Material::find($id);
+
+        $material->forceDelete();
+
+        Session::flash('success', __('trans.course_deleted'));
+        
+        return redirect()->back();
+    }
+
+    public function formatBytes($bytes, $precision = 2) { 
+        $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+    
+        $bytes = max($bytes, 0); 
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
+        $pow = min($pow, count($units) - 1); 
+    
+        // Uncomment one of the following alternatives
+        $bytes /= pow(1024, $pow);
+        // $bytes /= (1 << (10 * $pow)); 
+    
+        return round($bytes, $precision) . ' ' . $units[$pow]; 
+    } 
 }

@@ -11,9 +11,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">{{ __('words.course_teach') }}</th>
-                    <th scope="col">{{ __('words.level') }}</th>
-                    <th scope="col">{{ __('words.major') }}</th>
-                    <th scope="col">{{ __('words.uni') }}</th>
+                    <th scope="col">{{ __('logreg.phone') }}</th>
+                    <th scope="col">{{ __('words.uemail') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,9 +20,8 @@
                 <tr>
                     <td>{{ ($key+1) }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->level }}</td>
-                    <td>{{ $item->major }}</td>
-                    <td>{{ $item->university }}</td>
+                    <td>{{ $item->phone }}</td>
+                    <td>{{ $item->email }}</td>
                     <td>
                         <form action="{{ route('admin.teacher.delete', $item->id) }}" method="POST">
                             {{ method_field('DELETE') }}
@@ -56,23 +54,23 @@
 
                     <div class="form-group">
                         <label for="name">{{ __('words.course_teach') }}</label>
-                        <input class="form-control" type="text" name="name" id="name">
+                        <input class="form-control" type="text" name="name" id="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="level">{{ __('words.level') }}</label>
-                        <input class="form-control" type="text" name="level" id="level">
+                        <label for="phone">{{ __('logreg.phone') }}</label>
+                        <input class="form-control" type="text" name="phone" id="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="major">{{ __('words.major') }}</label>
-                        <input class="form-control" type="text" name="major" id="major">
+                        <label for="email">{{ __('words.uemail') }}</label>
+                        <input class="form-control" type="email" name="email" id="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="university">{{ __('words.uni') }}</label>
-                        <input class="form-control" type="text" name="university" id="university">
+                        <label for="password">{{ __('logreg.pass') }}</label>
+                        <input class="form-control" type="password" name="password" id="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="info">{{ __('words.teach_info') }}</label>
-                        <textarea class="form-control" name="info" id="info" cols="30" rows="3"></textarea>
+                        <label for="password-confirmation">{{ __('logreg.passconf') }}</label>
+                        <input class="form-control" type="password" name="password_confirmation" id="password-confirmation" required>
                     </div>
                 </form>
             </div>

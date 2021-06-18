@@ -99,7 +99,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         });
 
         $('body').append(
-            '<div id="toTop" class="btn btn-warning rounded-circle"><span class="fa fa-arrow-up"></span></div>'
+            '<div id="toTop" class="btn btn-secondary rounded-circle"><span class="fa fa-arrow-up"></span></div>'
         );
         $(window).scroll(function () {
             if ($(this).scrollTop() != 0) {

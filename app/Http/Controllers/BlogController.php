@@ -43,10 +43,7 @@ class BlogController extends Controller
 
     public function getMain()
     {
-      $images = new Image;
-      $images = Image::where('cover', 1)->get();
-
-      return view('main.index')->with(['imgs' => $images]);
+      return view('main.index');
     }
 
     public function getShort()

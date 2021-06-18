@@ -4,36 +4,89 @@
 {{ __('words.addsub') }}
 @endsection
 
-@section('stylee')
-<script src="{!! asset('js/tinymce/tinymce.min.js') !!}"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea',
-        directionality: "rtl",
-        plugins: 'link image lists',
-        toolbar: "insertfile undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-        menubar: false
-    });
-</script>
-@endsection
-
 @section('content')
-<div class="row">
-    <div class="col-sm m-3">
-        <div class="card card-default">
-            <div class="card-header">{{ __('words.addsub') }}</div>
-            <div class="card-body">
-                <form action="{{ route('admin.subject.add', $subject->id) }}" method="POST">
-                    {{ method_field('PUT') }}
+<div class="card card-default mt-3 mb-3">
+    <div class="card-header">{{ __('words.course') }}</div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{ __('words.course_name') }}</th>
+                    <th scope="col">{{ __('words.course_teach') }}</th>
+                    <th scope="col">{{ __('words.semester') }}</th>
+                    <th scope="col">{{ __('words.longc') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($subject as $key=>$course)
+                <tr>
+                    <td>{{ ($key+1) }}</td>
+                    <td>{{ $course->course_name }}</td>
+                    <td>{{ $course->teacher }}</td>
+                    <td>{{ $course->semester }}</td>
+                    <td>{{ $spec->spec_name }}</td>
+                    {{-- <td>
+                        <div class="row">
+                            <div class="col-sm-4 m-1">
+                                <a class="btn btn-default" href="{{ route('admin.scourse.edit', $course->id) }}">{{
+                                    __('words.c_edit') }}</a>
+                            </div>
+                        </div>
+                    </td> --}}
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ShortModal">
+            {{ __('words.shortc') }}
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="ShortModal" tabindex="-1" role="dialog" aria-labelledby="ShortModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ShortModalLabel">{{ __('words.shortc') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-short-course" action="{{ route('admin.subject.add', $spec->id) }}" method="post">
                     {{ csrf_field() }}
+
                     <div class="form-group">
-                        <label>{{ __('courses.text') }}</label>
-                        <textarea name="subject" rows="8" cols="80">{!! $subject->subject !!}</textarea>
+                        <label for="cname">{{ __('words.course_name') }}</label>
+                        <input class="form-control" type="text" name="course_name" id="cname">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success" type="submit">{{ __('words.addsub') }}</button>
+                        <label for="semester">{{ __('words.semester') }}</label>
+                        <input class="form-control" type="text" name="semester" id="semester">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher">{{ __('words.teach') }}</label>
+                        <select class="form-control" name="teacher" id="teacher">
+                            <option>{{ __('words.c_choseteach') }}</option>
+                            @foreach ($teacher->users as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialty">{{ __('words.longc') }}</label>
+                        <select class="form-control" name="spec_id" id="specialty">
+                            <option value="{{ $spec->id }}">{{ $spec->spec_name }}</option>
+                        </select>
                     </div>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('words.c_close') }}</button>
+                <button type="button" class="btn btn-success" onclick="event.preventDefault();
+                        document.getElementById('add-short-course').submit();">{{
+                    __('words.c_save') }}</button>
             </div>
         </div>
     </div>

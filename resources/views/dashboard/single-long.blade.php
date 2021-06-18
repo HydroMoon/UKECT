@@ -15,25 +15,24 @@
                     <th scope="col">{{ __('words.course_type') }}</th>
                     <th scope="col">{{ __('words.reg_date') }}</th>
                     <th scope="col">{{ __('words.course_dura') }}</th>
-                    <th scope="col" style="text-align: center;">{{ __('words.regst') }}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($regs as $key=>$cs)
                 <tr>
                     <td>{{ ($key+1) }}</td>
-                    <td>{{ $cs->lcourse->cname }}</td>
-                    <td>{{ $cs->lcourse->ctype }}</td>
-                    <td>{{ $cs->lcourse->created_at }}</td>
-                    <td>{{ $cs->lcourse->duration }}</td>
-                    <td style="text-align: center;">
+                    <td>{{ $cs->spec_name }}</td>
+                    <td>{{ $cs->spec_type }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $cs->duration }}</td>
+                    {{-- <td style="text-align: center;">
                         @if ($cs->accepted == 1)
                         <i class="fa fa-check" aria-hidden="true"></i>
                         @else
                         <i class="fa fa-times" aria-hidden="true"></i>
                         @endif
-                    </td>
-                    <td>
+                    </td> --}}
+                    {{-- <td>
                         <form action="{{ route('users.single.lupdate', $cs->id) }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -48,15 +47,15 @@
                             </select>
                             <button class="btn btn-success" type="submit">{{ __('words.reg_conf') }}</button>
                         </form>
-                    </td>
-                    <td>
+                    </td> --}}
+                    {{-- <td>
                         <div class="row">
                             <div class="col-sm-4 m-1">
                                 <a class="btn btn-default" href="{{ route('admin.note', ['id' => $user->id, 'cid' => $cs->lcourse->id]) }}">{{ __('words.add_note') }}</a>
                             </div>
                         </div>
-                    </td>
-                    <td>
+                    </td> --}}
+                    {{-- <td>
                             <form action="{{ route('users.single.addcertl') }}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <input type="file" class="form-control" name="cert" id="cert">
@@ -72,7 +71,7 @@
                                 <input type="hidden" name="user" value="{{ $cs->id }}">
                                 <button class="btn btn-success" type="submit">{{ __('words.addcert') }}</button>
                             </form>
-                        </td>
+                        </td> --}}
                 </tr>
                 @endforeach
             </tbody>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Reg;
 use App\Lcourse;
 use App\Scourse;
+use App\Specialty;
+use App\Course;
 use App\Teacher;
 use Session;
 
@@ -15,7 +17,7 @@ class CourseController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth:admin');
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -24,16 +26,10 @@ class CourseController extends Controller
      */
     public function getIndex()
     {
-
-        $short = new Scourse;
-        $long = new Lcourse;
-        $teacher = new Teacher;
-
-        $short = Scourse::all();
-        $long = Lcourse::all();
+        $long = Specialty::all();
         $teacher = Teacher::all();
 
-        return view('dashboard.courses')->with(['short' => $short, 'long' => $long, 'teacher' => $teacher]);
+        return view('dashboard.courses')->with(['long' => $long]);
     }
 
     /**
@@ -54,7 +50,7 @@ class CourseController extends Controller
             'start' => 'required|date_format:Y-m-d',
             'finish' => 'required|date_format:Y-m-d',
             'info' => 'required',
-          ));
+        ));
 
         $shortc = new Scourse;
 
@@ -75,27 +71,23 @@ class CourseController extends Controller
 
     public function storeLong(Request $request)
     {
-       
+
         //Validate
         $this->validate($request, array(
-            'cname' => 'required|string|max:255',
-            'ctype' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'certificate' => 'required|string',
+            'spec_name' => 'required|string|max:255',
+            'spec_type' => 'required|string|max:255',
+            'duration' => 'required',
             'info' => 'required',
-            'duration' => 'required'
-          ));
+        ));
 
-        $longc = new Lcourse;
+        $specialty = new Specialty;
 
-        $longc->cname = $request->cname;
-        $longc->ctype = $request->ctype;
-        $longc->price = $request->price;
-        $longc->certificate = $request->certificate;
-        $longc->info = $request->info;
-        $longc->duration = $request->duration;
+        $specialty->spec_name = $request->spec_name;
+        $specialty->spec_type = $request->spec_type;
+        $specialty->duration = $request->duration;
+        $specialty->info = $request->info;
 
-        $longc->save();
+        $specialty->save();
 
         Session::flash('success', __('trans.longc_success'));
 
@@ -120,12 +112,9 @@ class CourseController extends Controller
 
     public function editLong($id)
     {
-        $teacher = new Teacher;
-        $teacher = Teacher::all();
+        $long = Specialty::find($id);
 
-        $long = Lcourse::find($id);
-
-        return view('dashboard.edit-l')->with(['long' => $long, 'teacher' => $teacher]);
+        return view('dashboard.edit-l')->with(['long' => $long]);
     }
 
     /**
@@ -148,7 +137,7 @@ class CourseController extends Controller
             'start' => 'required|date_format:Y-m-d',
             'finish' => 'required|date_format:Y-m-d',
             'info' => 'required',
-          ));
+        ));
 
         $shortc = new Scourse;
 
@@ -169,24 +158,20 @@ class CourseController extends Controller
 
     public function updateLong(Request $request, $id)
     {
-        $longc = Lcourse::find($id);
+        $longc = Specialty::find($id);
 
         //Validate
         $this->validate($request, array(
-            'cname' => 'required|string|max:255',
-            'ctype' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'certificate' => 'required|string',
-            'info' => 'required',
+            'spec_name' => 'required|string|max:255',
+            'spec_type' => 'required|string|max:255',
             'duration' => 'required',
-          ));
+            'info' => 'required',
+        ));
 
-        $longc->cname = $request->cname;
-        $longc->ctype = $request->ctype;
-        $longc->price = $request->price;
-        $longc->certificate = $request->certificate;
-        $longc->info = $request->info;
+        $longc->spec_name = $request->spec_name;
+        $longc->spec_type = $request->spec_type;
         $longc->duration = $request->duration;
+        $longc->info = $request->info;
 
         $longc->save();
 
@@ -204,7 +189,7 @@ class CourseController extends Controller
     public function destroyShort($id)
     {
         $course = Scourse::find($id);
-        
+
         $course->delete();
 
         Session::flash('success', __('trans.course_deleted'));
@@ -215,12 +200,11 @@ class CourseController extends Controller
     public function destroyLong($id)
     {
         $course = Lcourse::find($id);
-        
+
         $course->delete();
 
         Session::flash('success', __('trans.course_deleted'));
 
         return redirect()->route('admin.courses');
     }
-    
 }

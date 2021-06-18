@@ -1,6 +1,6 @@
 @extends('dash')
 @section('title')
-{{ $long->cname }}
+{{ $long->spec_name }}
 @endsection
 @section('content')
 <div class="row">
@@ -11,20 +11,15 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="cname">{{ __('words.course_lname') }}</label>
-                <input class="form-control" type="text" name="cname" id="cname" value="{{ $long->cname }}">
+                <input class="form-control" type="text" name="spec_name" id="cname" value="{{ $long->spec_name }}">
             </div>
             <div class="form-group">
                 <label for="ctype">{{ __('words.course_type') }}</label>
-                <input class="form-control" type="text" name="ctype" id="ctype" value="{{ $long->ctype }}">
+                <input class="form-control" type="text" name="spec_type" id="ctype" value="{{ $long->spec_type }}">
             </div>
-            <input type="hidden" name="price" id="price" value="0">
             <div class="form-group">
                 <label for="certificate">{{ __('words.course_cert') }}</label>
-                <input class="form-control" type="text" name="certificate" id="certificate" value="{{ $long->certificate }}">
-            </div>
-            <div class="form-group">
-                <label for="duration">{{ __('words.course_dura') }}</label>
-                <input type="text" id="duration" class="form-control" name="duration" value="{{ $long->duration }}">
+                <input class="form-control" type="text" name="duration" id="certificate" value="{{ $long->duration }}">
             </div>
             <div class="form-group">
                 <label for="" info>{{ __('words.cl_info') }}</label>
@@ -34,7 +29,7 @@
     </div>
     <div class="col-md-4">
         <div class="card my-4">
-            <h5 class="card-header">{{ $long->cname }}</h5>
+            <h5 class="card-header">{{ $long->spec_name }}</h5>
             <div class="card-body">
                 <dl class="dl-horizontal mb-2">
                     <dt class="card-subtitle">{{ __('words.date_start') }}:</dt>
@@ -50,10 +45,10 @@
                         {{ __('words.c_save') }}
                     </a>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <button type="button" class="btn btn-danger col m-1" data-toggle="modal" data-target="#AppModel">{{
                         __('words.cl_delete') }}</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -11,5 +11,6 @@ return array (
   'phones' => 'Mobiles #',
   'ouremail' => 'Our Emails',
   'address' => 'Location',
-  'loc' => 'Khartoum - Al Safa Block 1 - West Wad Al Jabal Compound at Imtidad Naser',
+  'loc' => 'Deanship: Khartoum - Arabic Souq - East Al Faihaa Faisal Islamic Bank',
+  'loc1' => 'Branch: Omdurman - West Al-Merrikh SC',
 );

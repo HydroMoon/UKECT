@@ -24,7 +24,7 @@
                     <th scope="col">{{ __('words.uname') }}</th>
                     <th scope="col">{{ __('words.uphone') }}</th>
                     <th scope="col">{{ __('words.uemail') }}</th>
-                    <th scope="col">{{ __('words.regst') }}</th>
+                    {{-- <th scope="col">{{ __('words.regst') }}</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -37,24 +37,24 @@
                     <td>{{ $user->email }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-sm-4 m-1">
+                            {{-- <div class="col-sm-4 m-1">
                                 <a class="btn btn-default" href="{{ route('users.single.short', $user->id) }}">{{
                                     __('words.short') }}</a>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-4 m-1">
                                 <a class="btn btn-default" href="{{ route('users.single.long', $user->id) }}">{{
                                     __('words.long') }}</a>
                             </div>
                         </div>
                     </td>
-                    <td>
+                    {{-- <td>
                         <div class="row">
                             <div class="col-sm-4 m-1 dropdown">
                                 <a class="btn btn-default dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     {{ __('words.reg') }}
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('users.inside.short', $user->id) }}">{{
                                         __('words.short') }}</a>
                                     <a class="dropdown-item" href="{{ route('users.inside.long', $user->id) }}">{{
@@ -67,7 +67,7 @@
                                 </form>
                             </div>
                         </div>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
                 @endif

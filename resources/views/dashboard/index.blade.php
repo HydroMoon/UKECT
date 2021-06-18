@@ -6,6 +6,7 @@
   <div class="card mt-3 mb-3">
     <div class="card-header">{{ __('words.cpan') }}</div>
     <div class="card-body">
+      @role('admin')
       <div class="card-title">{{ __('words.cour') }}</div>
       <ul>
         <div class="form-group">
@@ -22,29 +23,31 @@
       <ul>
         <div class="form-group">
           <a class="btn btn-default" href="{{ route('users') }}">{{ __('words.vuser') }}</a>
-          <a class="btn btn-default" href="{{ route('users.add') }}">{{ __('words.auser') }}</a>
+          {{-- <a class="btn btn-default" href="{{ route('users.add') }}">{{ __('words.auser') }}</a> --}}
         </div>
       </ul>
-      <div class="card-title">{{ __('words.blog') }}</div>
+      {{-- <div class="card-title">{{ __('words.blog') }}</div>
       <ul>
         <div class="form-group">
           <a class="btn btn-default" href="{{ route('posts.index') }}">{{ __('words.posts') }}</a>
           <a class="btn btn-default" href="{{ route('posts.create') }}">{{ __('words.apost') }}</a>
         </div>
-      </ul>
-      <div class="card-title">{{ __('words.pics') }}</div>
-      <ul>
-        <div class="form-group">
-          <a class="btn btn-default" href="{{ route('admin.image') }}">{{ __('words.coveri') }}</a>
-          <a class="btn btn-default" href="{{ route('admin.media') }}">{{ __('words.mediai') }}</a>
-        </div>
-      </ul>
+      </ul> --}}
       <div class="card-title">{{ __('words.messages') }}</div>
       <ul>
         <div class="form-group">
           <a class="btn btn-default" href="{{ route('admin.message') }}">{{ __('words.vmess') }}</a>
         </div>
       </ul>
+      @endrole
+      @role('teacher')
+      <div class="card-title">{{ __('words.users') }}</div>
+      <ul>
+        <div class="form-group">
+          <a class="btn btn-default" href="{{ route('admin.courses.get') }}">{{ __('words.cour') }}</a>
+        </div>
+      </ul>
+      @endrole
     </div>
   </div>
 @endsection

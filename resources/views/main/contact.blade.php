@@ -36,18 +36,21 @@
       <div class="card-body">
         <dl class="dl-horizontal mb-2">
           <dt class="card-subtitle">{{ __('contact.phones') }}:</dt>
-          <dd class="text-muted" style="direction:ltr;">(+249 964 246 066)</dd>
-          <dd class="text-muted" style="direction:ltr;">(+249 999 959 606)</dd>
-          <dd class="text-muted" style="direction:ltr;">(+249 128 599 000)</dd>
+          <dd class="text-muted" style="direction:ltr;">(+249 183 764 532)</dd>
+          <dd class="text-muted" style="direction:ltr;">(+249 912 330 738)</dd>
+          <dd class="text-muted" style="direction:ltr;">(+249 918 187 187)</dd>
+          <dd class="text-muted" style="direction:ltr;">(+249 912 326 563)</dd>
+          <dd class="text-muted" style="direction:ltr;">(+249 123 777 312)</dd>
         </dl>
-        <dl class="dl-horizontal mb-2">
+        {{-- <dl class="dl-horizontal mb-2">
           <dt class="card-subtitle">{{ __('contact.ouremail') }}:</dt>
-          <dd class="text-muted">support@uk-ect.com</dd>
-          <dd class="text-muted">uk.ect.academic1@gmail.com</dd>
-        </dl>
+          <dd class="text-muted"></dd>
+          <dd class="text-muted"></dd>
+        </dl> --}}
         <dl class="dl-horizontal mb-2">
           <dt class="card-subtitle">{{ __('contact.address') }}:</dt>
           <dd class="text-muted">{{ __('contact.loc') }}</dd>
+          <dd class="text-muted">{{ __('contact.loc1') }}</dd>
         </dl>
       </div>
     </div>
