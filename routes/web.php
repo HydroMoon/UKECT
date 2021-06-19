@@ -63,6 +63,12 @@ Route::prefix('user')->group( function () {
 
     Route::get('/courses/{id}', 'UserController@getSubject')->name('user.courses.show');
     Route::get('/material/{c_id}', 'UserController@getStudentCourse')->name('user.materials');
+
+    //Quizzes
+    Route::get('/quizzes/{id}', 'UserController@getQuizzes')->name('user.quiz.show');
+    Route::get('/quiz/{id}', 'UserController@getQuestions')->name('user.question.show');
+    Route::post('/quiz-answer-add', 'UserController@addAnswers')->name('user.answer.add');
+
 });
 
     
@@ -137,6 +143,23 @@ Route::prefix('admin')->group( function () {
     Route::delete('del-material/{id}', 'AdminController@delMaterial')->name('admin.material.delete');
     
     Route::post('/upload', 'FileUploadController@store')->name('admin.upload.file');
+
+
+    //Quizzes
+    Route::get('/course-quiz/{c_id}', 'CourseController@getQuizzes')->name('admin.quiz.get');
+    Route::post('/course-quiz-add', 'CourseController@addQuizzes')->name('admin.quiz.add');
+    Route::delete('del-quiz/{id}', 'CourseController@delQuiz')->name('admin.quiz.delete');
+
+    //Quiz Questions
+    Route::get('/course-question/{q_id}', 'CourseController@getQuestions')->name('admin.question.get');
+    Route::post('/course-question-add', 'CourseController@addQuestions')->name('admin.question.add');
+    Route::delete('del-question/{id}', 'CourseController@delQuestion')->name('admin.question.delete');
+
+    //Answers
+    Route::get('/course-answers/{q_id}', 'CourseController@getAnswers')->name('admin.answer.get');
+    Route::post('/course-answer-add', 'CourseController@addAnswers')->name('admin.answer.add');
+    Route::delete('del-answer/{id}', 'CourseController@delAnswer')->name('admin.answer.delete');
+
 
 
     Route::post('/users/search', function () {

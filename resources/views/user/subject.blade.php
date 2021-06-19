@@ -32,7 +32,11 @@
                                     <div class="row">
                                         <div class="col-sm-4 m-1">
                                             <a class="btn btn-success" href="{{ route('user.materials', $course->id) }}">{{
-                                                __('words.open') }}</a>
+                                                __('words.subshow') }}</a>
+                                        </div>
+                                        <div class="col-sm-4 m-1">
+                                            <a class="btn btn-secondary" href="{{ route('user.quiz.show', $course->id) }}">{{
+                                                __('words.quiz') }}</a>
                                         </div>
                                     </div>
                                 </td>

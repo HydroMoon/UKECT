@@ -10,32 +10,36 @@
 @endsection
 @section('content')
 <div class="card card-default mt-3 mb-3">
-    <div class="card-header">{{ __('words.course') }} - {{ $cname }}</div>
+    <div class="card-header">{{ __('words.course') }} - {{ $quiz->course_name}}</div>
     <div class="card-body" style="overflow-x:auto;">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">{{ __('words.file_name') }}</th>
-                    <th scope="col">{{ __('words.file_type') }}</th>
-                    <th scope="col">{{ __('words.file_size') }}</th>
+                    <th scope="col">{{ __('words.quiz_name') }}</th>
+                    <th scope="col">{{ __('words.quiz_no') }}</th>
+                    <th scope="col">{{ __('words.quiz_score') }}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($material as $key=>$file)
+                @foreach ($quiz->quizzes as $key=>$item)
                 <tr>
                     <td>{{ ($key+1) }}</td>
-                    <td>{{ $file->name }}</td>
-                    <td>{{ $file->type }}</td>
-                    <td>{{ $file->size }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->max_number_questions }}</td>
+                    <td>{{ $item->min_score }}</td>
                     <td>
                         <div class="row">
                             <div class="col-sm-4 m-1">
-                                <form action="{{ route('admin.material.delete', $file->id) }}" method="post">
+                                <a class="btn btn-default" href="{{ route('admin.question.get', $item->id) }}">{{
+                                    __('words.quiz_addq') }}</a>
+                            </div>
+                            <div class="col-sm-4 m-1">
+                                <form action="{{ route('admin.quiz.delete', $item->id) }}" method="post">
                                     {{ method_field('DELETE') }}
                                     {{ csrf_field() }}
                                     <button class="btn btn-danger" type="submit">{{
-                                        __('words.file_del') }}</button>
+                                        __('words.quiz_del') }}</button>
                                 </form>
                             </div>
                         </div>
@@ -45,7 +49,7 @@
             </tbody>
         </table>
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ShortModal">
-            {{ __('words.file_add') }}
+            {{ __('words.quiz_add') }}
         </button>
     </div>
 </div>
@@ -54,24 +58,31 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ShortModalLabel">{{ __('words.shortc') }}</h5>
+                <h5 class="modal-title" id="ShortModalLabel">{{ __('words.quiz_add') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-short-course" action="{{ route('admin.upload.lectures') }}" method="post" enctype="multipart/form-data">
+                <form id="add-short-course" action="{{ route('admin.quiz.add') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="name">{{ __('words.file_name') }}</label>
-                        <input class="form-control" type="text" name="name" id="name">
+                        <label for="title">{{ __('words.quiz_name') }}</label>
+                        <input class="form-control" type="text" name="title" id="title">
                     </div>
+
                     <div class="form-group">
-                        <label for="file">{{ __('words.file') }}</label>
-                        <input type="file" class="filepond" name="file">
+                        <label for="no_ques">{{ __('words.quiz_no') }}</label>
+                        <input class="form-control" type="text" name="no_ques" id="no_ques">
                     </div>
-                    <input type="hidden" name="course_id" value="{{ $course_id }}">
+
+                    <div class="form-group">
+                        <label for="score">{{ __('words.quiz_score') }}</label>
+                        <input class="form-control" type="text" name="score" id="score">
+                    </div>
+
+                    <input type="hidden" name="course_id" value="{{ $quiz->id }}">
                 </form>
             </div>
             <div class="modal-footer">
@@ -83,18 +94,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('scri')
-<script>
-    FilePond.parse(document.body);
-    FilePond.setOptions({
-        server: {
-            url: '{{ route('admin.upload.file') }}',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        }
-    });
-</script>
 @endsection

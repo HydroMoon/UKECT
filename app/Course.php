@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Quizzable;
+
 
 class Course extends Model
 {
+    use Quizzable;
+
     protected $fillable = [
         'course_name', 'teacher', 'semester', 'spec_id',
     ];

@@ -13,6 +13,7 @@ use App\Note;
 use App\Material;
 use App\Specialty;
 use App\Course;
+use App\Quiz;
 use Auth;
 
 class UserController extends Controller
@@ -188,5 +189,26 @@ class UserController extends Controller
         $course_info = Course::find($c_id);
 
         return view('user.course-material')->with(['material' => $course, 'course_info' => $course_info]);
+    }
+
+    //Quizzes
+    public function getQuizzes($id)
+    {
+        $quiz = Course::find($id);
+        
+        return view('user.my-quiz')->with(['quiz' => $quiz]);
+    }
+
+    public function getQuestions($id)
+    {
+        $questions = Quiz::find($id);
+        
+        return view('user.take-quiz')->with(['questions' => $questions]);
+    }
+
+    //Answers
+    public function addAnswers(Request $request)
+    {
+        dd($request);
     }
 }

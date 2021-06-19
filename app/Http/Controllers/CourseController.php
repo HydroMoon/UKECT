@@ -9,6 +9,9 @@ use App\Lcourse;
 use App\Scourse;
 use App\Specialty;
 use App\Course;
+use App\Question;
+use App\QuestionOption;
+use App\Quiz;
 use App\Teacher;
 use Session;
 
@@ -206,5 +209,134 @@ class CourseController extends Controller
         Session::flash('success', __('trans.course_deleted'));
 
         return redirect()->route('admin.courses');
+    }
+
+    //Quiz
+    public function getQuizzes($c_id)
+    {
+        $quiz = Course::find($c_id);
+
+        return view('dashboard.add-quizzes')->with(['quiz' => $quiz]);
+    }
+
+    public function addQuizzes(Request $request)
+    {
+        $this->validate($request, array(
+            'title' => 'required|string|max:255',
+            'no_ques' => 'required|numeric|max:10',
+            'score' => 'required|numeric|max:100',
+        ));
+
+        $newQuiz = new Quiz;
+
+        $newQuiz->title = $request->title;
+        $newQuiz->max_number_questions = $request->no_ques;
+        $newQuiz->min_score = $request->score;
+
+        $newQuiz->quizzable()->associate($request->course_id);
+
+        $newQuiz->save();
+
+        Session::flash('success', __('words.certsuc'));
+        
+        return redirect()->back();
+    }
+
+    public function delQuiz($id)
+    {
+        $quiz = Quiz::find($id);
+
+        $quiz->delete();
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
+    }
+
+    //Question
+    public function getQuestions($q_id)
+    {
+        $questions = Quiz::find($q_id);
+        
+        return view('dashboard.add-questions')->with(['questions' => $questions]);
+    }
+
+    public function addQuestions(Request $request)
+    {
+        $this->validate($request, array(
+            'question' => 'required|string|max:255',
+        ));
+
+        $newQuestion = new Question;
+
+        $newQuestion->question = $request->question;
+        $newQuestion->type = 'c';
+
+        $newQuestion->quiz()->associate($request->quiz_id);
+
+        $newQuestion->save();
+
+        Session::flash('success', __('words.certsuc'));
+        
+        return redirect()->back();
+    }
+
+    public function delQuestion($id)
+    {
+        $question = Question::find($id);
+
+        $question->delete();
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
+    }
+
+    //Answers
+    public function getAnswers($q_id)
+    {
+        $answers = Question::find($q_id);
+
+        return view('dashboard.show-answers')->with(['answers' => $answers]);
+    }
+
+    public function addAnswers(Request $request)
+    {
+        $question_id = $request->question_id;
+        $ques = 'question' . $question_id;
+        $corr = 'correct' . $question_id;
+
+        $this->validate($request, array(
+            $ques => 'required|string|max:255',
+        ));
+        
+        $answer = new QuestionOption;
+
+        $answer->alternative = $request->$ques;
+
+        if ($request->has($corr)) {
+            $answer->correct = true;
+        } else {
+            $answer->correct = false;    
+        }
+
+        $answer->question()->associate($request->question_id);
+
+        $answer->save();
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
+    }
+
+    public function delAnswer($id)
+    {       
+        $answer = QuestionOption::find($id);
+
+        $answer->delete();
+
+        Session::flash('success', __('words.certsuc'));
+
+        return redirect()->back();
     }
 }

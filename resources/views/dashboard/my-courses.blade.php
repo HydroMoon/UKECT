@@ -27,8 +27,12 @@
                     <td>
                         <div class="row">
                             <div class="col-sm-4 m-1">
-                                <a class="btn btn-default" href="{{ route('admin.lectures.get', $course->id) }}">{{
+                               <a class="btn btn-default" href="{{ route('admin.lectures.get', $course->id) }}">{{
                                     __('words.addsub') }}</a>
+                            </div>
+                            <div class="col-sm-4 m-1">
+                                <a class="btn btn-secondary" href="{{ route('admin.quiz.get', $course->id) }}">{{
+                                    __('words.quiz_add') }}</a>
                             </div>
                         </div>
                     </td>
