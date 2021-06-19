@@ -13,7 +13,9 @@ use App\Note;
 use App\Material;
 use App\Specialty;
 use App\Course;
+use App\Question;
 use App\Quiz;
+use App\QuizAttempt;
 use Auth;
 
 class UserController extends Controller
@@ -196,7 +198,10 @@ class UserController extends Controller
     {
         $quiz = Course::find($id);
         
-        return view('user.my-quiz')->with(['quiz' => $quiz]);
+        $taken = QuizAttempt::where('user_id', auth()->id())->get();
+
+        // dd($taken);
+        return view('user.my-quiz')->with(['quiz' => $quiz, 'taken' => $taken]);
     }
 
     public function getQuestions($id)
@@ -209,6 +214,31 @@ class UserController extends Controller
     //Answers
     public function addAnswers(Request $request)
     {
-        dd($request);
+        
+
+        $countQuestion = Question::where('quiz_id', $request->quiz_id)->get();
+
+        $countCorrect = 0;
+        for ($i = 0; $i < $countQuestion->count(); $i++) { 
+            $num = 'choice' . strval($countQuestion[$i]->id);
+            $countCorrect += $request->$num;
+        }
+        
+        $score = ($request->quiz_score / $countQuestion->count()) * $countCorrect;
+        
+        $quizAnswer = new QuizAttempt;
+
+        $quizAnswer->alternative = auth()->user()->name . '/' . $request->quiz_name;
+        $quizAnswer->attempt = 1;
+        $quizAnswer->score = $score;
+
+        $quizAnswer->quiz()->associate($request->quiz_id);
+        $quizAnswer->user()->associate(auth()->id());
+
+        $quizAnswer->save();
+
+        Session::flash('success', __('words.quiz_finish'));
+
+        return redirect()->route('user.quiz.show', Quiz::find($request->quiz_id)->quizzable->id);
     }
 }

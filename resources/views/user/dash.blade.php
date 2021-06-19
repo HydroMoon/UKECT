@@ -11,10 +11,7 @@
                 {{-- <ul>{{ __('user.reg') }}</ul> --}}
                 <div class="row">
                     <div class="col-sm m-1">
-                        <a class="btn btn-default btn-block" href="{{ route('user.courses.show', auth()->user()->spec_id) }}">{{ __('user.long') }}</a>
-                    </div>
-                    <div class="col-sm m-1">
-                        <a class="btn btn-default btn-block" href="#">{{ __('words.quiz') }}</a>
+                        <a class="btn btn-default btn-block" href="{{ route('user.courses.show', auth()->user()->spec_id) }}">{{ __('words.cou_qui') }}</a>
                     </div>
                 </div>
             </div>

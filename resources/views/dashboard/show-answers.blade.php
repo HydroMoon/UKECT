@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-{{ __('words.addsub') }}
+{{ __('words.quiz') }}
 @endsection
 @section('stylee')
 <!-- Filepond stylesheet -->

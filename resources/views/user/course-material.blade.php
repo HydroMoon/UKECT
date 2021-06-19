@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-Material Name
+المواد
 @endsection
 @section('jum')
 <div class="jumbotron jumbotron-fluid purple-gradient text-white">

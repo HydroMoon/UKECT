@@ -160,7 +160,9 @@ Route::prefix('admin')->group( function () {
     Route::post('/course-answer-add', 'CourseController@addAnswers')->name('admin.answer.add');
     Route::delete('del-answer/{id}', 'CourseController@delAnswer')->name('admin.answer.delete');
 
-
+    //Users marka
+    Route::get('/users-marks/{c_id}', 'CourseController@getMarks')->name('admin.mark.get');
+    Route::get('/quiz-marks/{q_id}', 'CourseController@getQuizMark')->name('admin.quizmark.get');
 
     Route::post('/users/search', function () {
         $q = Input::get('q');

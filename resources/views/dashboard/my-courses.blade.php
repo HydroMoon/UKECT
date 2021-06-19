@@ -34,6 +34,10 @@
                                 <a class="btn btn-secondary" href="{{ route('admin.quiz.get', $course->id) }}">{{
                                     __('words.quiz_add') }}</a>
                             </div>
+                            <div class="col-sm-4 m-1">
+                                <a class="btn btn-primary" href="{{ route('admin.mark.get', $course->id) }}">{{
+                                    __('words.stud_ma') }}</a>
+                            </div>
                         </div>
                     </td>
                 </tr>

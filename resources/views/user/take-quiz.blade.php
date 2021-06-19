@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-{{ __('words.certhead') }}
+{{ __('words.quiz') }}
 @endsection
 
 @section('content')
@@ -29,6 +29,8 @@
                         </div>
                         @endforeach
                         <input type="hidden" name="quiz_id" value="{{ $questions->id }}">
+                        <input type="hidden" name="quiz_name" value="{{ $questions->title }}">
+                        <input type="hidden" name="quiz_score" value="{{ $questions->min_score }}">
                         <div class="form-group text-center">
                             <button class="btn btn-success" type="submit">{{ __('words.c_save') }}</button>
                         </div>

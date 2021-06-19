@@ -12,6 +12,7 @@ use App\Course;
 use App\Question;
 use App\QuestionOption;
 use App\Quiz;
+use App\QuizAttempt;
 use App\Teacher;
 use Session;
 
@@ -338,5 +339,20 @@ class CourseController extends Controller
         Session::flash('success', __('words.certsuc'));
 
         return redirect()->back();
+    }
+
+    //Users marks
+    public function getMarks($c_id)
+    {
+        $quizzes = Course::find($c_id);
+
+        return view('dashboard.show-quizzes')->with(['quizzes' => $quizzes]);
+    }
+
+    public function getQuizMark($q_id)
+    {
+        $quizzes = QuizAttempt::where('quiz_id', $q_id)->get();
+
+        return view('dashboard.users-marks')->with(['quizzes' => $quizzes]);
     }
 }

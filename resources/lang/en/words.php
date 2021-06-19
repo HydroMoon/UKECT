@@ -117,4 +117,8 @@ return array (
   'iscorrect' => 'correct?',
   'ans_show' => 'Show Answers',
   'ans_del' => 'Delete Answer',
+  'quiz_finish' => 'Quiz Finished',
+  'stud_mark' => 'Student Mark',
+  'stud_ma' => 'Students Marks',
+  'cou_qui' => 'Courses & Quizzes',
 );

@@ -63,7 +63,7 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
           <div class="dropdown-menu dropdown-default dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.dash') }}">Dashboard</a>
-            <a class="dropdown-item text-center waves-effect waves-light" href="#">Quizzes</a>
+            <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('user.courses.show', auth()->user()->spec_id) }}">Courses & Quizzes</a>
             <a class="dropdown-item text-center waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
               Logout
