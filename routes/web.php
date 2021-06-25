@@ -131,6 +131,9 @@ Route::prefix('admin')->group( function () {
     Route::post('/teachers', 'AdminController@createTeacher')->name('admin.teacher.add');
     Route::delete('/teachers/{id}', 'AdminController@deleteTeacher')->name('admin.teacher.delete');
 
+    Route::post('/teachers-name', 'AdminController@nameTeacher')->name('admin.teacher.name');
+
+
     Route::get('/add-note/{id}/{cid}', 'AdminController@addNote')->name('admin.note');
     Route::post('/add-note', 'AdminController@storeNote')->name('admin.note.store');
 

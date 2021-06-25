@@ -95,6 +95,24 @@ class AdminController extends Controller
         return view('dashboard.teacher')->with(['teacher' => $teach]);
     }
 
+    public function nameTeacher(Request $request)
+    {
+        $this->validate($request, array(
+            'name' => 'required|string|max:255'
+          ));
+
+        $teach = Admin::find(auth()->id());
+
+        $teach->name = $request->name;
+
+        $teach->save();
+
+        Session::flash('success', __('words.certsuc'));
+
+
+        return redirect()->back();
+    }
+
     public function storeTeacher(Request $request)
     {
         $this->validate($request, array(
@@ -368,7 +386,7 @@ class AdminController extends Controller
             ['spec_id', $request->spec_id],
             ['semester', $request->semester]
         ])->get();
-        
+
         $teacher = Role::where('name', '=', 'Teacher')->first();
         $spec = Specialty::find($request->spec_id);
         

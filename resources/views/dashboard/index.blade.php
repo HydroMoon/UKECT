@@ -47,6 +47,20 @@
           <a class="btn btn-default" href="{{ route('admin.courses.get') }}">{{ __('words.cour') }}</a>
         </div>
       </ul>
+      <div class="card-title">{{ __('words.teach_name') }}</div>
+      <ul>
+        <div class="form-group">
+          <form class="col-sm-6" action="{{ route('admin.teacher.name') }}" method="post">
+            {{ csrf_field() }}
+            <div class="form-group col-sm-8">
+              <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-success" type="submit">{{ __('words.c_save') }}</button>
+            </div>
+          </form>
+        </div>
+      </ul>
       @endrole
     </div>
   </div>
