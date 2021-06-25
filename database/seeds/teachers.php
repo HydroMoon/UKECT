@@ -2,10 +2,9 @@
 
 use App\Admin;
 use Illuminate\Database\Seeder;
-use jeremykenedy\LaravelRoles\Models\Permission;
 use jeremykenedy\LaravelRoles\Models\Role;
 
-class UsersTableSeeder extends Seeder
+class teachers extends Seeder
 {
     /**
      * Run the database seeds.
