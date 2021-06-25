@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="card card-default mt-3 mb-3">
-    <div class="card-header">{{ __('words.course') }}</div>
+    <div class="card-header">{{ __('words.course') }} - {{ $spec->spec_name }}</div>
     <form class="col-sm-6 mt-3 mx-auto row" action="{{ route('admin.subjectp.get') }}" method="post">
         {{ csrf_field() }}
         <div class="form-group col-sm">
