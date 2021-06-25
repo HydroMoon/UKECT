@@ -76,8 +76,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('words.c_close') }}</button>
-                <button type="button" class="btn btn-success" onclick="event.preventDefault();
-                        document.getElementById('add-short-course').submit();">{{
+                <button type="button" id="submitBtn" class="btn btn-success" onclick="event.preventDefault();
+                        document.getElementById('add-short-course').submit();" disabled>{{
                     __('words.c_save') }}</button>
             </div>
         </div>
@@ -95,6 +95,11 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         }
+    });
+
+    document.addEventListener('FilePond:processfile', (e) => {
+        console.log('FilePond ready for use', e.detail);
+        document.getElementById('submitBtn').disabled = false;
     });
 </script>
 @endsection
