@@ -4,7 +4,7 @@ use App\Admin;
 use Illuminate\Database\Seeder;
 use jeremykenedy\LaravelRoles\Models\Role;
 
-class teachers extends Seeder
+class TeachersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
