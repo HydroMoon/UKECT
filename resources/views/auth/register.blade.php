@@ -53,7 +53,7 @@
                             <select class="form-control" name="spec_id" id="spec_id">
                                 <option>{{ __('words.choose_long') }}</option>
                                 @foreach ($specs as $item)
-                                <option value="{{ $item->id }}">{{ $item->spec_name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->spec_type . ': ' . $item->spec_name }}</option>
                                 @endforeach
                             </select>
                         </div>
