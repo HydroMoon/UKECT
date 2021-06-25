@@ -184,6 +184,18 @@ class UserController extends Controller
         return view('user.subject')->with(['courses' => $courses, 'spec' => $spec]);
     }
 
+    public function getSubjectP(Request $request)
+    {
+        $courses = Course::where([
+            ['spec_id', $request->spec_id],
+            ['semester', $request->semester]
+        ])->get();
+        
+        $spec = Specialty::find($request->spec_id);
+
+        return view('user.subject')->with(['courses' => $courses, 'spec' => $spec]);
+    }
+
     // [ADD]LMS FUNCTIONS
     public function getStudentCourse($c_id)
     {

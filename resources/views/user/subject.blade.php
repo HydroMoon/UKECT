@@ -9,6 +9,27 @@
         <div class="col-sm">
             <div class="card card-default mt-3 mb-3">
                 <div class="card-header">{{ __('words.course') }} - {{ $spec->spec_name }}</div>
+                <form class="col-sm-6 mt-3 mx-auto row" action="{{ route('user.coursesP.show') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group col-sm">
+                        <label for="semester">{{ __('words.semester') }}</label>
+                        <select name="semester" id="semester" class="form-control">
+                            <option value="1">{{ __('words.semester') }} - 1</option>
+                            <option value="2">{{ __('words.semester') }} - 2</option>
+                            <option value="3">{{ __('words.semester') }} - 3</option>
+                            <option value="4">{{ __('words.semester') }} - 4</option>
+                            <option value="5">{{ __('words.semester') }} - 5</option>
+                            <option value="6">{{ __('words.semester') }} - 6</option>
+                            <option value="7">{{ __('words.semester') }} - 7</option>
+                            <option value="8">{{ __('words.semester') }} - 8</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="spec_id" value="{{ $spec->id }}">
+                    <div class="form-group">
+                        <br>
+                        <button class="btn btn-success" type="submit">{{ __('words.open') }}</button>
+                    </div>
+                </form>
                 <div class="card-body" style="overflow-x:auto;">
                     <table class="table table-striped">
                         <thead>

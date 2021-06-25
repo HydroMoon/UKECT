@@ -362,6 +362,19 @@ class AdminController extends Controller
         return view('dashboard.subject')->with(['subject' => $subject, 'teacher' => $teacher, 'spec' => $spec]);
     }
 
+    public function getSubjectP(Request $request)
+    {
+        $subject = Course::where([
+            ['spec_id', $request->spec_id],
+            ['semester', $request->semester]
+        ])->get();
+        
+        $teacher = Role::where('name', '=', 'Teacher')->first();
+        $spec = Specialty::find($request->spec_id);
+        
+        return view('dashboard.subject')->with(['subject' => $subject, 'teacher' => $teacher, 'spec' => $spec]);
+    }
+
     public function addSubject(Request $request, $id)
     {
         $this->validate($request, array(
@@ -416,11 +429,28 @@ class AdminController extends Controller
     }
 
 
-    public function getMyCourses()
+    public function getMyCourses($specc = 1, $semester = 1)
     {
-        $courses = Course::where('teacher_id', auth()->id())->get();
+        $courses = Course::where([
+            ['teacher_id', auth()->id()],
+            ['spec_id', $specc],
+            ['semester', $semester]
+        ])->get();
+        $spec = Specialty::all();
         
-        return view('dashboard.my-courses')->with(['courses' => $courses]);
+        return view('dashboard.my-courses')->with(['courses' => $courses, 'spec' => $spec]);
+    }
+
+    public function getPMyCourses(Request $request)
+    {
+        $courses = Course::where([
+            ['teacher_id', auth()->id()],
+            ['spec_id', $request->spec_id],
+            ['semester', $request->semester]
+        ])->get();
+        $spec = Specialty::all();
+
+        return view('dashboard.my-courses')->with(['courses' => $courses, 'spec' => $spec]);
     }
 
     public function getLectures($c_id)

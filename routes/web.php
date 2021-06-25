@@ -62,6 +62,7 @@ Route::prefix('user')->group( function () {
 
 
     Route::get('/courses/{id}', 'UserController@getSubject')->name('user.courses.show');
+    Route::post('/courses', 'UserController@getSubjectP')->name('user.coursesP.show');
     Route::get('/material/{c_id}', 'UserController@getStudentCourse')->name('user.materials');
 
     //Quizzes
@@ -134,10 +135,12 @@ Route::prefix('admin')->group( function () {
     Route::post('/add-note', 'AdminController@storeNote')->name('admin.note.store');
 
     Route::get('/program/{id}', 'AdminController@getSubject')->name('admin.subject.get');
+    Route::post('/program', 'AdminController@getSubjectP')->name('admin.subjectp.get');
     Route::post('/program/{id}', 'AdminController@addSubject')->name('admin.subject.add');
 
 
     Route::get('/my-courses', 'AdminController@getMyCourses')->name('admin.courses.get');
+    Route::post('/my-courses', 'AdminController@getPMyCourses')->name('admin.coursesP.get');
     Route::get('/add-lectures/{c_id}', 'AdminController@getLectures')->name('admin.lectures.get');
     Route::post('/upload-lectures', 'AdminController@addMaterials')->name('admin.upload.lectures');
     Route::delete('del-material/{id}', 'AdminController@delMaterial')->name('admin.material.delete');
