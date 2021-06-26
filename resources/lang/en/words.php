@@ -122,4 +122,5 @@ return array (
   'stud_ma' => 'Students Marks',
   'cou_qui' => 'Courses & Quizzes',
   'teach_name' => 'Change teacher name',
+  'quiz_all' => 'Student name/Quiz name',
 );

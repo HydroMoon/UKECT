@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">{{ __('words.') }}</th>
+                    <th scope="col">{{ __('words.quiz_all') }}</th>
                     <th scope="col">{{ __('words.quiz_score') }}</th>
                 </tr>
             </thead>
